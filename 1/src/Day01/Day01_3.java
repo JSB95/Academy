@@ -9,6 +9,7 @@ public class Day01_3 { // c s
 		// 입력
 			// 키보드 -------> 컴퓨터
 			// scanner : 입력 클래스 [입력에 관련된 기능 제공]
+		@SuppressWarnings("resource")
 		Scanner 입력객체 = new Scanner(System.in);
 		// 1. scanner : 입력
 			// 2. scanner : 객체 이름
