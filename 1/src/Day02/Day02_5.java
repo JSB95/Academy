@@ -127,8 +127,8 @@ public class Day02_5 {
 		int int3 = scanner.nextInt();
 		System.out.println("네번째 정수 : ");
 		int int4 = scanner.nextInt();
-		int first =
-		int second = 
+		int first =(int1 < int2 && int2 < int3 && int3 < int4) || (int1 < int3 && int3 < int2 && int2 < int4) ? int4 : (int1 < int2 && int2 < int4 && int4 < int3 || int1 < int4 && int4 < int2 && int2 < int3) ? int3 : (int1 < int3 && int3 < int4 && int4 < int2) || (int1 < int4 && int4 < int3 && int3 < int2) ? int2 : int1;
+		int second = (first = int2 && int1 < int3 && int3 < int4) || (first = int2 && int1 < int4 && int4 < int3) || (first = int3 && int1 < int2 & int2 < int4 ) || (first = int3 && int1 < int4 && int4 < int2) || (first = int1 && int2 < int3 && int3 < int4) || (first = int1 && int2 < int4 && int4 <int3) || (first=int3 && int2 <int1 && int1 <int4) || (first=int3 && int2 < int4 && int4 <int1) ||  (first = int4 && int2 < int1 && int1 <int3) || (first=int4 && int2 < int3 && int3 < int1) ? int2 : 
 		int third = 
 		int fourth = 
 		
