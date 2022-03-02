@@ -10,7 +10,7 @@ public class Day02_5 {
 		// 문제 3
 		
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("정수 입력 : ");	
+		/*System.out.println("정수 입력 : ");	
 		int 정수 = scanner.nextInt();
 		String 결과1 = ((정수 % 7)>=1) ? "7의 배수가 아닙니다." : "7의 배수입니다.";
 		
@@ -93,6 +93,10 @@ public class Day02_5 {
 		int x = 10;
 		int y = x-- + 5 + --x;
 		System.out.printf("x의 값 : %d, y의 값 : %d",x,y);
+			// 1. x-- + 5 -> 감소전에 먼저 -> 10 + 5
+			// 2. x-- -> x 감소 (x=9)
+			// 3. 15 + --x -> 감소 먼저 (x=8)
+			// 4. 15 + 8 = 23
 		
 		// 문제 15
 		System.out.println("나이를 입력하세요 : ");
@@ -100,15 +104,43 @@ public class Day02_5 {
 		String 나이대 = age > 40 ? "중년" : age > 20 ? "성인" : "학생";
 		System.out.println(나이대);
 				
+	
+		//문제 15
+		System.out.println("첫번째 정수 : ");
+		int int1 = scanner.nextInt();
+		System.out.println("두번째 정수 : ");
+		int int2 = scanner.nextInt();
+		System.out.println("세번째 정수 : ");
+		int int3 = scanner.nextInt();
+		
+		int 첫째 = (int1 > int2 & int2 > int3) ? int3 : (int1 > int3 & int3> int2) ? int2 : (int2 > int1 & int1 > int3) ? int3 : (int2 > int3 & int3 > int1) ? int1 : (int3 > int1 & int1 > int2) ? int2 : (int3 > int2 & int2 > int1) ? int1 : null;
+		int 둘째 = (첫째==int1 && int2>int3 || 첫째==int2 && int1>int3) ? int3 : (첫째==int1 && int3>int2 || 첫째==int3 && int1>int2) ? int2 :int1;
+		int 셋째 = (첫째==int1 && 둘째==int2 || 첫째==int2 && 둘째==int1) ? int3 : (첫째==int2 && 둘째==int3 || 첫째==int3 && 둘째==int2) ? int1 :int2;
+		System.out.printf("%d\n%d\n%d",첫째,둘째,셋째);*/
+		
+		// 문제 16
+		System.out.println("첫번째 정수 : ");
+		int int1 = scanner.nextInt();
+		System.out.println("두번째 정수 : ");
+		int int2 = scanner.nextInt();
+		System.out.println("세번째 정수 : ");
+		int int3 = scanner.nextInt();
+		System.out.println("네번째 정수 : ");
+		int int4 = scanner.nextInt();
+		int first =
+		int second = 
+		int third = 
+		int fourth = 
+		
 		// 확인문제
 		/* 1. 3번
 		 * 2. 31
 		 * 3. 나
 		 * 4. #1 : pencils/students #2 : pencils%students
-		 * 5. #1 : (value/100) * 100
+		 * 5. #1 : value-(value % 100)
 		 * 6. #1 : (double)((lengthTop + lengthBottom) * height)/2;
 		 * 7. true, false
-		 * 8. 
+		 * 8. ArithmeticException e
 		 */
 		
 	}
