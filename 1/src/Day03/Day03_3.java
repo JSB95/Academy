@@ -7,7 +7,7 @@ public class Day03_3 {
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
-		/*
+		
 		// 문제 6 : 점수를 입력받아 점수가 90점 이상이면 합격 아니면 불합격
 		
 		System.out.println("점수를 입력하세요 : ");
@@ -24,7 +24,7 @@ public class Day03_3 {
 		else if (score2 > 80) { System.out.println("B");}
 		else if (score2 > 70) { System.out.println("C");}
 		else System.out.println("재시험"); 
-		*/
+		
 		
 		// 문제 8 : 로그인 / 아이디가 admin이고 비밀번호가 1234일 경우에는 로그인 성공, 아니면 로그인 실패 출력
 		System.out.println("ID : ");
