@@ -9,8 +9,9 @@ public class Day02_5 {
 		
 		// 문제 3
 		
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		/*System.out.println("정수 입력 : ");	
+		System.out.println("정수 입력 : ");	
 		int 정수 = scanner.nextInt();
 		String 결과1 = ((정수 % 7)>=1) ? "7의 배수가 아닙니다." : "7의 배수입니다.";
 		
@@ -116,10 +117,10 @@ public class Day02_5 {
 		int 첫째 = (int1 > int2 & int2 > int3) ? int3 : (int1 > int3 & int3> int2) ? int2 : (int2 > int1 & int1 > int3) ? int3 : (int2 > int3 & int3 > int1) ? int1 : (int3 > int1 & int1 > int2) ? int2 : (int3 > int2 & int2 > int1) ? int1 : null;
 		int 둘째 = (첫째==int1 && int2>int3 || 첫째==int2 && int1>int3) ? int3 : (첫째==int1 && int3>int2 || 첫째==int3 && int1>int2) ? int2 :int1;
 		int 셋째 = (첫째==int1 && 둘째==int2 || 첫째==int2 && 둘째==int1) ? int3 : (첫째==int2 && 둘째==int3 || 첫째==int3 && 둘째==int2) ? int1 :int2;
-		System.out.printf("%d\n%d\n%d",첫째,둘째,셋째);*/
+		System.out.printf("%d\n%d\n%d",첫째,둘째,셋째);
 		
 		// 문제 16
-		System.out.println("첫번째 정수 : ");
+		/*System.out.println("첫번째 정수 : ");
 		int int1 = scanner.nextInt();
 		System.out.println("두번째 정수 : ");
 		int int2 = scanner.nextInt();
@@ -130,7 +131,7 @@ public class Day02_5 {
 		int first =(int1 < int2 && int2 < int3 && int3 < int4) || (int1 < int3 && int3 < int2 && int2 < int4) ? int4 : (int1 < int2 && int2 < int4 && int4 < int3 || int1 < int4 && int4 < int2 && int2 < int3) ? int3 : (int1 < int3 && int3 < int4 && int4 < int2) || (int1 < int4 && int4 < int3 && int3 < int2) ? int2 : int1;
 		int second = (first = int2 && int1 < int3 && int3 < int4) || (first = int2 && int1 < int4 && int4 < int3) || (first = int3 && int1 < int2 & int2 < int4 ) || (first = int3 && int1 < int4 && int4 < int2) || (first = int1 && int2 < int3 && int3 < int4) || (first = int1 && int2 < int4 && int4 <int3) || (first=int3 && int2 <int1 && int1 <int4) || (first=int3 && int2 < int4 && int4 <int1) ||  (first = int4 && int2 < int1 && int1 <int3) || (first=int4 && int2 < int3 && int3 < int1) ? int2 : 
 		int third = 
-		int fourth = 
+		int fourth = */
 		
 		// 확인문제
 		/* 1. 3번

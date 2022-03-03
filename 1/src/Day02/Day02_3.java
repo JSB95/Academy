@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Day02_3 {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
 		// *입력 -> 저장 -> 계산 -> 출력

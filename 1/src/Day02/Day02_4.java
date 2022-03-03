@@ -1,6 +1,7 @@
 package Day02;
 public class Day02_4 {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		// p.64 ¿¬»êÀÚ

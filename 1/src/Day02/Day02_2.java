@@ -2,6 +2,7 @@ package Day02;
 
 public class Day02_2 { // c s
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) { // m s
 		
 		//; : 실행 단위 구분
