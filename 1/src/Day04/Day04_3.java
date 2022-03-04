@@ -27,13 +27,14 @@ public class Day04_3 {	// class start
 		int game = 0;																	// 게임 수
 		int user_win = 0;																// 사용자 승리 수
 		int com_win = 0;																// 컴퓨터 승리 수
+		int draw = 0;
 		
 		// 프로그램 실행
 		
 		while (true) {																// 프로그램 실행[무한루프 종료조건 : 3번 입력시]
-			System.out.println("---------가위바위보---------");
-			System.out.println("가위[0] 바위[1] 보[2] 종료[3]");
-			System.out.println("-------------------------");
+			System.out.println("-------------가위바위보-------------");
+			System.out.println("가위[0] 바위[1] 보[2] 결과[3] 종료[4]");
+			System.out.println("---------------------------------");
 			System.out.print("선택하세요 : ");
 			System.out.println("");
 			user = scanner.nextInt();												// 사용자 수 입력받기
@@ -51,6 +52,7 @@ public class Day04_3 {	// class start
 				System.out.println("컴퓨터가 낸 수: " + com + "\n");
 				System.out.println("비겼습니다.\n");
 				game++;
+				draw++;
 			} else if ((user == 2 && com == 0) || (user == 0 && com == 1) || (user == 1 && com == 2)) {
 				System.out.println("컴퓨터가 낸 수: " + com + "\n");
 				System.out.println("컴퓨터가 이겼습니다.\n");
@@ -60,6 +62,7 @@ public class Day04_3 {	// class start
 				System.out.println("총 게임 수: " + game);
 				System.out.println("사용자 승리 수 : " + user_win);
 				System.out.println("컴퓨터 승리 수 : " + com_win);
+				System.out.println("비긴 횟수 : " + draw);
 				if (user_win > com_win) {
 					System.out.println("최종승리 : 사용자\n");
 				} else if (user_win == com_win) {
@@ -70,6 +73,9 @@ public class Day04_3 {	// class start
 				game = 0;
 				user_win = 0;
 				com_win = 0;
+				draw = 0;
+			} else if (user == 4) {
+				break;
 			} else {
 				System.out.println("잘못된 번호입니다.\n");
 			}
