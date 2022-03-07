@@ -148,7 +148,7 @@ public class Day05_4 {
 								} else if (login_ch == 4) {
 									for (int i = 0; i < boardlist.length; i++) {
 										if (boardlist[i][0] != null && boardlist[i][2].equals(id)) {
-											boardlist[i][1] = "O";
+											boardlist[i][1] = "대여가능";
 											boardlist[i][2] = null;
 											System.out.println("도서반납완료");
 										}
