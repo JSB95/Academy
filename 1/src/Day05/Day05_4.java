@@ -9,7 +9,7 @@ public class Day05_4 {
 		Scanner scanner = new Scanner(System.in);
 		String [][] memberlist = new String [100][3];
 		String [][] boardlist = new String [100][3];
-		boardlist[0][0] = "자서전"; boardlist[0][1] = "대여가능"; boardlist[0][2] = null;
+		boardlist[0][0] = "자서전"; boardlist[0][1] = "대여가능"; 
 		
 		
 		while (true) {
@@ -62,49 +62,103 @@ public class Day05_4 {
 						로그인확인=true;
 						System.out.println("로그인이 완료되었습니다.");
 						if(로그인확인 = false) System.out.println("로그인에 실패하였습니다.");
-						while (true) {
-							System.out.println("1. 도서검색 2. 도서목록 3. 도서대여 4. 도서반납 5. 로그아웃");
-							System.out.println("선택 > ");
-							int login_ch = scanner.nextInt();
-							if (login_ch == 1) {
-								System.out.println("도서명 : "); 
-								String book_search = scanner.next();
-								System.out.println("번호\t도서명\t도서대여여부\t대여인");
-								for (int i = 0; i < boardlist.length; i++) {
-									if (boardlist[i][0] != null && boardlist[i][0].equals(book_search)) {
-										System.out.println((i+1) + "\t" + boardlist[i][0] + "\t" + boardlist[i][1] + "\t\t" + boardlist[i][2]);
+						if (id.equals("admin")) {
+							while (true) {
+								System.out.println("1. 도서등록 2. 도서목록 3. 도서삭제 4. 로그아웃");
+								
+								int login_ch = scanner.nextInt();
+								
+								if (login_ch == 1) {
+									System.out.println("도서명: "); String 도서등록 = scanner.next();
+									for(int i=0; i<boardlist.length; i++) {
+										if(boardlist[i][0] == null) {
+											boardlist[i][0]= 도서등록;
+											System.out.println(도서등록);
+											boardlist[i][1]="대여가능";
+											System.out.println("등록완료");
+											break;
+										}
 									}
-								}
-							} else if (login_ch == 2) {
-								System.out.println("번호\t도서명\t도서대여여부\t대여인");
-								for (int i = 0; i < boardlist.length; i++) {
-									if (boardlist[i][0] != null) {
-										System.out.printf("%d\t%s\t%s\t     %s \n", i+1, boardlist[i][0], boardlist[i][1], boardlist[i][2]);
+								} else if (login_ch == 2) {
+									System.out.println("번호\t도서명\t도서대여여부\t대여인");
+									for (int i = 0; i < boardlist.length; i++) {
+										if (boardlist[i][0] != null) {
+											if (boardlist[i][2] == null) {
+												System.out.printf("%d\t%s\t%s\t     %s \n", i+1, boardlist[i][0], boardlist[i][1], " ");
+											} else {
+												System.out.printf("%d\t%s\t%s\t     %s \n", i+1, boardlist[i][0], boardlist[i][1], boardlist[i][2]);
+											}
+											
+										}
 									}
-								}
-							} else if (login_ch == 3) {
-								System.out.println("도서명 : ");
-								String book_lend = scanner.next();
-								for (int i = 0; i < boardlist.length; i++) {
-									if (boardlist[i][0] != null && boardlist[i][0].equals(book_lend) && boardlist[i][1].equals("대여가능")) {
-										System.out.println("도서대여 완료");
-										boardlist[i][1] = "도서대여불가";
-										boardlist[i][2] = id;
+								} else if (login_ch == 3) {
+									System.out.println("도서명 : ");
+									String book_del = scanner.next();
+									for (int i = 0; i < boardlist.length; i++) {
+										if (boardlist[i][0] != null && boardlist[i][0].equals(book_del)) {
+											boardlist[i][0] = null;
+											boardlist[i][1] = null;
+											boardlist[i][2] = null;
+										}
 									}
+								} else if (login_ch == 4) {
+									System.out.println("로그아웃 완료");
+									break;
+								} else {
+									System.err.println("잘못된 접근입니다.");
 								}
-							} else if (login_ch == 4) {
-								for (int i = 0; i < boardlist.length; i++) {
-									if (boardlist[i][0] != null && boardlist[i][2].equals(id)) {
-										boardlist[i][1] = "O";
-										boardlist[i][2] = null;
-										System.out.println("도서반납완료");
+							}
+							
+						} else {
+							while (true) {
+								System.out.println("1. 도서검색 2. 도서목록 3. 도서대여 4. 도서반납 5. 로그아웃");
+								System.out.println("선택 > ");
+								int login_ch = scanner.nextInt();
+								if (login_ch == 1) {
+									System.out.println("도서명 : "); 
+									String book_search = scanner.next();
+									System.out.println("번호\t도서명\t도서대여여부\t대여인");
+									for (int i = 0; i < boardlist.length; i++) {
+										if (boardlist[i][0] != null && boardlist[i][0].equals(book_search)) {
+											System.out.println((i+1) + "\t" + boardlist[i][0] + "\t" + boardlist[i][1] + "\t" + boardlist[i][2]);
+										}
 									}
+								} else if (login_ch == 2) {
+									System.out.println("번호\t도서명\t도서대여여부\t대여인");
+									for (int i = 0; i < boardlist.length; i++) {
+										if (boardlist[i][0] != null) {
+											if (boardlist[i][2] == null) {
+												System.out.printf("%d\t%s\t%s\t     %s \n", i+1, boardlist[i][0], boardlist[i][1], " ");
+											} else {
+												System.out.printf("%d\t%s\t%s\t     %s \n", i+1, boardlist[i][0], boardlist[i][1], boardlist[i][2]);
+											}
+											
+										}
+									}
+								} else if (login_ch == 3) {
+									System.out.println("도서명 : ");
+									String book_lend = scanner.next();
+									for (int i = 0; i < boardlist.length; i++) {
+										if (boardlist[i][0] != null && boardlist[i][0].equals(book_lend) && boardlist[i][1].equals("대여가능")) {
+											System.out.println("도서대여 완료");
+											boardlist[i][1] = "도서대여불가";
+											boardlist[i][2] = id;
+										}
+									}
+								} else if (login_ch == 4) {
+									for (int i = 0; i < boardlist.length; i++) {
+										if (boardlist[i][0] != null && boardlist[i][2].equals(id)) {
+											boardlist[i][1] = "O";
+											boardlist[i][2] = null;
+											System.out.println("도서반납완료");
+										}
+									}
+								} else if (login_ch == 5) {
+									System.out.println("로그아웃 완료");
+									break;
+								} else {
+									System.err.println("잘못된 접근입니다.");
 								}
-							} else if (login_ch == 5) {
-								System.out.println("로그아웃 완료");
-								break;
-							} else {
-								System.err.println("잘못된 접근입니다.");
 							}
 						}
 					}
