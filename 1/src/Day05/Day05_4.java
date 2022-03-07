@@ -18,7 +18,7 @@ public class Day05_4 {
 			System.out.println("1. 회원가입  2.로그인");
 			System.out.println("선택> "); int 선택 = scanner.nextInt();
 			
-			if(선택==1) {
+			if(선택==1) {1
 				System.out.println("------------회원가입--------");
 				System.out.println("아이디: "); String id = scanner.next();
 				System.out.println("비밀번호: "); String pw = scanner.next();
