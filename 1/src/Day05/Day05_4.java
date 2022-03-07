@@ -9,6 +9,7 @@ public class Day05_4 {
 		Scanner scanner = new Scanner(System.in);
 		String [][] memberlist = new String [100][3];
 		String [][] boardlist = new String [100][3];
+		boardlist[0][0] = "자서전"; boardlist[0][1] = "대여가능"; boardlist[0][2] = null;
 		
 		
 		while (true) {
@@ -68,32 +69,35 @@ public class Day05_4 {
 							if (login_ch == 1) {
 								System.out.println("도서명 : "); 
 								String book_search = scanner.next();
+								System.out.println("번호\t도서명\t도서대여여부\t대여인");
 								for (int i = 0; i < boardlist.length; i++) {
 									if (boardlist[i][0] != null && boardlist[i][0].equals(book_search)) {
-										System.out.println(boardlist[i][0] + "" + boardlist[i][1]);
+										System.out.println((i+1) + "\t" + boardlist[i][0] + "\t" + boardlist[i][1] + "\t\t" + boardlist[i][2]);
 									}
 								}
 							} else if (login_ch == 2) {
 								System.out.println("번호\t도서명\t도서대여여부\t대여인");
 								for (int i = 0; i < boardlist.length; i++) {
 									if (boardlist[i][0] != null) {
-										System.out.printf("%d\t%s\t%s\t%s", i+1, boardlist[i][0], boardlist[i][1], boardlist[i][2]);
+										System.out.printf("%d\t%s\t%s\t     %s \n", i+1, boardlist[i][0], boardlist[i][1], boardlist[i][2]);
 									}
 								}
 							} else if (login_ch == 3) {
 								System.out.println("도서명 : ");
+								String book_lend = scanner.next();
 								for (int i = 0; i < boardlist.length; i++) {
-									if (boardlist[i][0] != null && boardlist[i][1].equals('O')) {
+									if (boardlist[i][0] != null && boardlist[i][0].equals(book_lend) && boardlist[i][1].equals("대여가능")) {
 										System.out.println("도서대여 완료");
-										boardlist[i][1] = "X";
+										boardlist[i][1] = "도서대여불가";
 										boardlist[i][2] = id;
 									}
 								}
 							} else if (login_ch == 4) {
 								for (int i = 0; i < boardlist.length; i++) {
-									if (boardlist[i][2].equals(id)) {
+									if (boardlist[i][0] != null && boardlist[i][2].equals(id)) {
 										boardlist[i][1] = "O";
 										boardlist[i][2] = null;
+										System.out.println("도서반납완료");
 									}
 								}
 							} else if (login_ch == 5) {
