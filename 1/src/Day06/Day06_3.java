@@ -48,7 +48,7 @@ public class Day06_3 {
 				 System.out.print("비밀번호 : "); 	String loginpw = scanner.next();
 				 
 				 // 2. 기존 배열[memberlist] 내 입력받은 값과 비교
-				 boolean loginchk = false;
+				 boolean loginchk = false; 	// true : 로그인 성공 false : 로그인 실패
 				 for (Member temp : memberlist) {
 					 if (temp != null && temp.id.equals(loginid) && temp.pw.equals(loginpw)) {
 						 System.out.println("\n로그인 성공");
