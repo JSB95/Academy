@@ -118,11 +118,10 @@ public class Day05_4 {
 								System.out.println("선택 > ");
 								int login_ch = scanner.nextInt();
 								if (login_ch == 1) {
-									
+									System.out.println("도서명 : "); 
+									String book_search = scanner.next();
+									System.out.println("번호\t도서명\t도서대여여부\t대여인");
 									for (int i = 0; i < boardlist.length; i++) {
-										System.out.println("도서명 : "); 
-										String book_search = scanner.next();
-										System.out.println("번호\t도서명\t도서대여여부\t대여인");
 										if (boardlist[i][0] != null && boardlist[i][0].equals(book_search)) {
 											System.out.println((i+1) + "\t" + boardlist[i][0] + "\t" + boardlist[i][1] + "\t" + boardlist[i][2]);
 										} else {
