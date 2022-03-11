@@ -16,6 +16,8 @@ public class af {
 			System.out.printf("당신의 계좌번호는 : %d - %d - %d 입니다.",first,second, third);
 			account = first * 10000000 + second * 1000 + third; 
 			System.out.println("\n현재 잔액 : " + Day08_5.formatter.format(balance) + "원");
+			String acc_num = Long.toString(account);
+			System.out.println("acc : " + acc_num);
 		} else if (create_ch == 2) {
 			return;
 		} else {
