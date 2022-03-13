@@ -6,13 +6,15 @@ import java.text.DecimalFormat;
 
 public class init {
 	
+
+	
 	static Scanner scanner = new Scanner(System.in);
 	static Random random = new Random();
 	static Member[] members = new Member[1000];
 	static Account[] accounts = new Account[1000];
 	static Loan[] loans = new Loan[1000];
 	static DecimalFormat formatter = new DecimalFormat("###,###");
-	
+
 
 	public static void main(String[] args) {
 		init init = new init();
@@ -57,19 +59,23 @@ public class init {
 	}
 	
 	void member_menu() {
-
 		while (true) {
-			Account account = new Account();
-			System.out.println("==========================================================");
+			System.out.println("========================================================");
 			System.out.println("                           회원 메뉴");
 			System.out.println("========================================================\n");
 			System.out.println("1. 계좌생성 2. 입금 3. 출금 4. 이체 5. 대출 6. 내 계좌목록 7. 로그아웃");
 			System.out.print("\n선택 > ");
 			int ch = scanner.nextInt();
+			Member member = new Member();
+			Account account = new Account();
 			if (ch == 1) {
-				account.account_create();
+				System.out.println("\n계좌를 생성하시겠습니까?\n\n1.예 2.아니오");
+				System.out.print("\n선택 > "); int create_ch = init.scanner.nextInt();
+				int account_num = account.account_create(create_ch);
+				member.add_account(account_num);
 			} else if (ch == 2) {
-				
+				System.out.print("\n계좌번호를 입력하세요 : "); int account_num = scanner.nextInt();
+				account.deposit(account_num);
 			} else if (ch == 3) {
 				
 			} else if (ch == 4) {
@@ -77,11 +83,8 @@ public class init {
 			} else if (ch == 5) {
 				
 			} else if (ch == 6) {
-				for (Account temp : init.accounts) {
-					if (temp != null ) {
-						System.out.println("계좌번호 : " + Member.account);
-					} 
-				}
+				System.out.print("\n비밀번호를 한번 더 입력하세요 : "); String pw = scanner.next();
+				account.list_account(pw);
 			} else if (ch == 7) {
 				break;
 			} else {

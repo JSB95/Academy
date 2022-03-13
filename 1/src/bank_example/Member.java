@@ -1,25 +1,38 @@
 package bank_example;
 
+
 public class Member {
 	
 	// field
-	String pw, name, contact;
-	static String id;
-	static int balance, num, account;
+	String id, pw, name, contact;
+	static String pw_chk;
+	int balance, num, account;
 	
 	// constructor
 	public Member() { }
-	public Member(int account) {
+	
+	public Member(int balance, int account) {
+		this.balance = balance;
 		this.account = account;
 	}
-	public Member(int num, String id, String pw, String name, String contact, int balance) {
+
+	public Member(int num, String id, String pw, String name, String contact) {
+		this.num = num;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.contact = contact;
+	};
+	
+	public Member(int num, String id, String pw, String name, String contact, int balance, int account) {
 		this.num = num;
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 		this.contact = contact;
 		this.balance = balance;
-	};
+		this.account = account;
+	}
 	
 	// method
 	boolean sign_up() {
@@ -50,7 +63,8 @@ public class Member {
 			}
 			j++;
 		}
-		Member member = new Member(member_num, id, pw, name, contact, balance);
+
+		Member member = new Member(member_num, id, pw, name, contact, balance, account);
 		// sign up process
 		int i = 0;
 		for (Member temp : init.members) {
@@ -66,11 +80,12 @@ public class Member {
 	
 	String sign_in() {
 		System.out.println("\n------------- 로그인 -------------\n");
-		System.out.print("ID : "); 			String id = init.scanner.next();
-		System.out.print("PASSWORD : ");	String pw = init.scanner.next();
+		System.out.print("ID : "); 			String id = init.scanner.next();	
+		System.out.print("PASSWORD : ");	String pw = init.scanner.next();	pw_chk = pw;
 		for (Member temp : init.members) {
 			if (temp != null && temp.id.equals(id) && temp.pw.equals(pw)) {
-				return temp.id;
+				pw_chk = temp.pw;
+				return pw_chk;
 			}
 		}
 		return null;
@@ -102,10 +117,17 @@ public class Member {
 		System.err.println("\n회원 정보가 없습니다.");
 	}
 	
-	void account_add() {
-		Account account = new Account();
-
+	public void add_account(int account) {
+		for (Member temp : init.members) {
+			if (temp != null && temp.pw.equals(pw_chk))
+				temp.account = account;
+		}
+		
+	
 	}
+	
+
+
 	
 
 	
