@@ -96,7 +96,20 @@ public class Bank_Controller {	// class
 	public int transfer(String account, String pw, String transfer_account, int transfer_amount) {
 		int i = 0;
 		for (Bank temp : Day09_6.banklist) {
-			if (temp != null && temp.getAccount().equals(account) )
+			if (temp != null && temp.getAccount().equals(account) && temp.getPw().equals(pw)) {
+				int j = 0;
+				for (Bank temp2 : Day09_6.banklist) {
+					if (temp2 != null && temp2.getAccount().equals(transfer_account)) {
+						if (temp.getBalance() < transfer_amount) {
+							return 1;
+						} else {
+							Day09_6.banklist[i].setBalance(temp.getBalance() - transfer_amount);
+							Day09_6.banklist[j].setBalance(temp.getBalance() + transfer_amount);
+							return 2;
+						}
+					} return 3;
+				}
+			}
 		}
 		return 4;
 	}

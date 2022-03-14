@@ -62,7 +62,16 @@ public class Day09_6 {
 				System.out.print("비밀번호 : ");				String pw = scanner.next();
 				System.out.print("이체계좌 : ");				String transfer_account = scanner.next();
 				System.out.print("이체금액 : ");				int transfer_amount = scanner.nextInt();
-				int result = bank_Controller.transfer(account, pw, transfer_account, transfer_amount)
+				int result = bank_Controller.transfer(account, pw, transfer_account, transfer_amount);
+				if (result == 1) {
+					System.err.println("\n잔액부족");
+				} else if (result == 2) {
+					System.out.println("\n이체성공");
+				} else if (result == 3) {
+					System.err.println("\n받는 계좌 정보가 없습니다.");
+				} else if (result == 4) {
+					System.err.println("\n보내는 계좌 정보가 없습니다.");
+				}
 			} else if (ch == 5) {
 				System.out.println("---------- 계좌목록 페이지 ----------"); 
 				System.out.print("\nNAME : ");	String name = scanner.next();
