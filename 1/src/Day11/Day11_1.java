@@ -43,7 +43,7 @@ public class Day11_1 {
 			}
 		}; // 구현 끝
 		
-		action.work();
+		action.work();	// 인터페이스 객체 내 메소드 실행
 	}
 
 }
