@@ -1,16 +1,15 @@
 package Test2;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 
 public class Car {
 	
 	// field
 	
 	private String car_num;
-	private LocalDate date;
-	private LocalTime intime, outtime;
+	private String date, intime, outtime;
 	private int fee;
+	
 	
 	// constructor
 	
@@ -18,18 +17,14 @@ public class Car {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Car(String car_num, LocalDate date, LocalTime intime) {
-		this.car_num = car_num;
-		this.date = date;
-		this.intime = intime;
-	}
+
 	
-	public Car(String car_num, LocalTime outtime) {
+	public Car(String car_num, String outtime) {
 		this.car_num = car_num;
 		this.outtime = outtime;
 	}
 
-	public Car(String car_num, LocalDate date, LocalTime intime, LocalTime outtime, int fee) {
+	public Car(String car_num, String date, String intime, String outtime, int fee) {
 		super();
 		this.car_num = car_num;
 		this.date = date;
@@ -48,27 +43,27 @@ public class Car {
 		this.car_num = car_num;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public LocalTime getIntime() {
+	public String getIntime() {
 		return intime;
 	}
 
-	public void setIntime(LocalTime intime) {
+	public void setIntime(String intime) {
 		this.intime = intime;
 	}
 
-	public LocalTime getOuttime() {
+	public String getOuttime() {
 		return outtime;
 	}
 
-	public void setOuttime(LocalTime outtime) {
+	public void setOuttime(String outtime) {
 		this.outtime = outtime;
 	}
 
@@ -79,5 +74,6 @@ public class Car {
 	public void setFee(int fee) {
 		this.fee = fee;
 	}
+
 
 }
