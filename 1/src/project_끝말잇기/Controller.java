@@ -36,7 +36,7 @@ public class Controller {
 	}
 	
 	// duplication test 
-	public static boolean duplication_text (String id) {
+	public static boolean duplication_test (String id) {
 		for(Member temp : memberlist) {
 			if (temp.getId().equals(id)) {
 				return false;
