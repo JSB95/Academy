@@ -1,0 +1,58 @@
+package controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+
+public class Findpwpane implements Initializable{
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	@FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TextField txtid;
+
+    @FXML
+    private Button btnfind;
+
+    @FXML
+    private Button btnback;
+
+    @FXML
+    private Label label_idfind;
+
+    @FXML
+    private TextField txtemail;
+
+    @FXML
+    void back(ActionEvent event) {
+    	
+    	Login.login.loadpage("/view/loginpane.fxml");
+    	
+    }
+
+    @FXML
+    void findpw(ActionEvent event) {
+
+    }
+	
+	
+
+}
