@@ -30,7 +30,7 @@ class Timerbar extends JLabel implements Runnable{
 			
 			if (getWidth() > 0) {
 				width -= 1;
-				System.out.println(width);
+				//System.out.println(width);
 				setBounds(x, y, width, height);
 			} else {
 				//System.out.println("Á¾·á");

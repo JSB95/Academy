@@ -13,14 +13,14 @@ public class TimerTest extends JFrame{
 	private Thread threadNum;
 	
 	public TimerTest() {
-		int second = 15;
+		int second = 60;
 		
 		panel = new JPanel();
 		panel.setLayout(null);
 		timerbar = new Timerbar(second);
 		threadBar = new Thread(timerbar);
 		threadBar.start();
-		panel.add(timerbar);
+		//panel.add(timerbar);
 		
 		timerNum = new TimerNum(second);
 		threadNum = new Thread(timerNum);

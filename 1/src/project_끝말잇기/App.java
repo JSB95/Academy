@@ -2,10 +2,21 @@ package project_끝말잇기;
 
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import project_끝말잇기.Controller.GameTimer;
+
+
 public class App {
 	
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+	public static boolean inputCheck = false;
+	static boolean 결과;
+	static Scanner scanner = new Scanner(System.in);
+	static String word;
+	public static void main (String[] args) {
+		
+		
 		try {
 			
 			while(true) {
@@ -48,13 +59,40 @@ public class App {
 					if (result == 1) {
 						System.out.println("\n로그인 성공\n");
 						System.out.println("\n1. 게임시작 2. 로그아웃");
+						game(id);
 					} else if (result == 2) {
 						System.err.println("\n비밀번호 오류\n");
 					} else if (result == 3) {
 						System.err.println("\n아이디 오류\n");
 					}
-					
 				} else if (ch == 3) {
+					System.out.println("1. ID찾기 2. PW찾기"); int s = scanner.nextInt();
+					if(s==1) { // id찾기
+						System.out.println("===============================");
+						System.out.println("           ID찾기 페이지");
+						System.out.println("===============================");
+						System.out.println("이름 입력 : "); String name = scanner.next();
+						System.out.println("전화번호 입력 : "); String contact = scanner.next();
+						String id=Controller.idsearch(name, contact);
+						if(id==null) { // 리턴값이 null이면
+							System.out.println("일치하는 회원 정보가 없습니다.");
+						}else { // null말고 제대로 반환하면
+							System.out.println("회원님의 아이디는 "+id+"입니다.");
+						}
+						
+					}else if(s==2) { // pw찾기
+						System.out.println("===============================");
+						System.out.println("         비밀번호 찾기 페이지");
+						System.out.println("===============================");
+						System.out.println("아이디 입력 : "); String id = scanner.next();
+						System.out.println("전화번호 입력 : "); String contact = scanner.next();
+						String pw=Controller.pwsearch(id, contact);
+						if(pw==null) { // 리턴값이 null이면
+							System.out.print("일치하는 회원 정보가 없습니다.");
+						}else { // null말고 제대로 반환하면
+							System.out.print("회원님의 비밀번호는 "+pw+"입니다.");
+						}
+					}
 					
 				} else {
 					System.err.println("\n잘못된 접근\n");
@@ -69,6 +107,54 @@ public class App {
 		
 		
 		
+	}
+	static Scanner scanner2 = new Scanner(System.in);
+	static boolean result;
+	public static void game (String id) throws InterruptedException {
+		
+		try {
+			while(true) {
+				System.out.println("---------끝말잇기 게임---------");
+				System.out.println("1. 시작 2. 내 점수보기 3.로그아웃");
+				System.out.println("----------------------------");
+				System.out.print(">>>>>: "); int ch = scanner.nextInt();
+				
+				//boolean 결과 = false;
+				if(ch == 1) {
+					System.out.println("게임 시작");
+					String firstword = Controller.randomfirstword();
+					System.out.print("첫번째 글자 : " + firstword + "\n");
+					
+					while(true) {
+						Controller.GameTimer gameTimer = new GameTimer();
+						
+						gameTimer.start();
+						System.out.print("입력 > "); 	word = scanner2.next();
+						gameTimer.interrupt();
+						
+						
+						결과 = Controller.gameStart(id, word);
+						System.out.println(결과);
+						if(!결과) {
+							System.err.println("게임 종료");
+							Controller.initialization(id);
+							break;
+						}
+						
+
+					}
+
+				}
+				else if(ch == 2) {
+					System.out.println("---------점수 보기---------");
+					Controller.seeScore(id);
+				}
+				else if(ch == 3) {break;}
+				else System.out.println("올바른 숫자 입력");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
