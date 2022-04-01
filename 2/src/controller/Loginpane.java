@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dao.MemberDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ public class Loginpane implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		label.setText("");
 		
 	}
 	
@@ -44,6 +46,7 @@ public class Loginpane implements Initializable{
     void accfindid(ActionEvent event) {
     	System.out.println("아이디찾기 페이지로 이동");
     	Login.login.loadpage("/view/findidpane.fxml");
+    	
     }
 
     @FXML
@@ -63,6 +66,16 @@ public class Loginpane implements Initializable{
     @FXML
     void login(ActionEvent event) {
     	System.out.println("로그인처리");
+    	
+    	String id = txtid.getText();
+    	String pw = txtpw.getText();
+    	
+    	boolean result = MemberDao.memberDao.login(id, pw);
+    	if (result) {
+    		label.setText("로그인 성공");
+    	} else {
+    		label.setText("동일한 회원정보가 없습니다.");
+    	}
     }
     
 }
