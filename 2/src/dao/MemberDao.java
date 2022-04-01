@@ -121,12 +121,11 @@ public class MemberDao {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				String pw = rs.getString("mpassword");
-				System.out.println(pw);
 				return pw;
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("findpw ERROR : " + e);
 		}
 		return null;
 	}
