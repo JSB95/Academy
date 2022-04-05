@@ -1,8 +1,10 @@
-package controller;
+package controller.login;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import dto.Member;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,16 +17,15 @@ import javafx.fxml.Initializable;
 public class Login implements Initializable{
 	
 	// 해당 클래스를 반환해주는 메소드
-	public static Login login;
+	public static Login instance;
 	// 생성자
 	public Login() {
 		// TODO Auto-generated constructor stub
-		login = this;	// super : 슈퍼클래스, this : 현재클래스
+		instance = this;	// super : 슈퍼클래스, this : 현재클래스
 		// this : 현재클래스 자체 메모리 호출
 	}
-	public static Login getlogin() {
-		return login;
-	}
+
+	public static Member member;
 	
 
     @FXML
@@ -47,7 +48,7 @@ public class Login implements Initializable{
 			// 4) 미디어 플레이어 시작
 		mediaPlayer.play();
 		System.out.println(mediaPlayer);
-		loadpage("/view/loginpane.fxml");
+		loadpage("/view/login/loginpane.fxml");
 		
 	}
 	

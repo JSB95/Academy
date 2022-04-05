@@ -13,6 +13,12 @@ import javafx.fxml.Initializable;
 public class Main implements Initializable{
 							// Initializable : view가 열렸을 때 초기값 설정 메소드 제공
 	
+	public static Main instance;
+	
+	public Main() {
+		// TODO Auto-generated constructor stub
+		instance = this;
+	}
 
     @FXML
     private MediaView mediaview;
@@ -24,7 +30,7 @@ public class Main implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	// TODO Auto-generated method stub
 		System.out.println("Main view run");
-		loadpage("/view/login");
+		loadpage("/view/login/login");
 			
 	}
 

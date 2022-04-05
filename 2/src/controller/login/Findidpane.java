@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 
 import java.net.URL;
@@ -39,7 +39,7 @@ public class Findidpane implements Initializable{
 	 @FXML
 	 void back(ActionEvent event) {
 		 
-		 Login.login.loadpage("/view/loginpane.fxml");
+		 Login.instance.loadpage("/view/login/loginpane.fxml");
 
 	 }
 

@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -52,7 +52,7 @@ public class Signuppane implements Initializable {
 
     @FXML
     void back(ActionEvent event) {
-    	Login.login.loadpage("/view/loginpane.fxml");
+    	Login.instance.loadpage("/view/login/loginpane.fxml");
 
     }
 
@@ -106,7 +106,7 @@ public class Signuppane implements Initializable {
     	
     	// 모든 유효성 검사 통과 시 DB에 저장
     	
-    	Member member = new Member(0, 0, id, pw, email, address, cine);
+    	Member member = new Member(0, id, pw, email, address, 0, cine);
     	
     	boolean result = MemberDao.memberDao.signup(member);
     	
@@ -118,7 +118,7 @@ public class Signuppane implements Initializable {
     		alert.setHeaderText("가입을 축하합니다.");
     		alert.setContentText("회원가입 성공");
     		alert.showAndWait();
-    		Login.login.loadpage("view/login.fxml");
+    		Login.instance.loadpage("view/login/login.fxml");
     	} else {
     		labelconfirm.setText("회원가입 실패");
     		System.err.println("가입 실패");

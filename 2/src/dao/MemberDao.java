@@ -53,7 +53,7 @@ public class MemberDao {
 			ps.setString(2, member.getMid());
 			ps.setString(3, member.getMpassword());
 			ps.setString(4, member.getMemail());
-			ps.setString(5, member.getMadderss());
+			ps.setString(5, member.getMaddress());
 			ps.setString(6, member.getMsince());
 			
 			ps.executeUpdate();
@@ -128,6 +128,53 @@ public class MemberDao {
 			System.err.println("findpw ERROR : " + e);
 		}
 		return null;
+	}
+	
+	public Member getmember(String id) {
+		try {
+			String sql = "SELECT * FROM member where mid=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				Member member = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7));
+				return member;
+			}
+			
+		} catch (Exception e) {
+			System.err.println("getmember ERROR : " + e);
+		}
+		
+		return null;
+	}
+	
+	public boolean delete (int mnum) {
+		try {
+			String sql = "DELETE FROM member WHERE mnum = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, mnum);
+			ps.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.err.println("delete ERROR : " + e);
+		}
+		return false;
+	}
+	
+	public boolean update(int mnum, String email, String address) {
+		try {
+			String sql = "UPDATE member SET memail = ?, maddress = ? WHERE mnum = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, email);
+			ps.setString(2, address);
+			ps.setInt(3, mnum);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("update ERROR : " + e);
+		}
+		return false;
 	}
 	
 	

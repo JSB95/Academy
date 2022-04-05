@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Start extends Application{
@@ -25,6 +26,12 @@ public class Start extends Application{
 				// 생략 [src폴더로부터] /img/파일명.확장자
 		stage.setResizable(false);
 		stage.getIcons().add(image);
+		
+		// 외부 폰트
+		Font.loadFont(getClass().getResourceAsStream("SANGJU Gotgam.ttf"), 14);
+		// 외부 스타일
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
 		stage.setTitle("이젠마켓");
 		stage.show();
 		
