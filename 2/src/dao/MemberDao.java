@@ -177,6 +177,21 @@ public class MemberDao {
 		return false;
 	}
 	
+	public String getmid (int mnum) {
+		try {
+			String sql = "SELECT mid FROM member WHERE mnum = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, mnum);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			System.err.println("getmid ERROR : " + e);
+		}
+		return null;
+	}
+	
 	
 
 }

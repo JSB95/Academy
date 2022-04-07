@@ -43,18 +43,59 @@ public class Home implements Initializable {
 	private Label lblupdate; // fxid가져오기
 	@FXML
 	private Label lblboard; // fxid가져오기
+	@FXML
+	private Label lblproduct1;
+	@FXML
+	private Label lblproduct2;
+	@FXML
+	private Label lblproduct3;
+	@FXML
+	private Label lblproduct4;
 	
 	@FXML
 	private BorderPane borderpane;
 	
+	public static String category;
+	
+	@FXML
+	public void accproduct1( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category = "남성의류";
+	}
+	
+	@FXML
+	public void accproduct2( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category = "여성의류";
+	}
+	
+	@FXML
+	public void accproduct3( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category = "게임기기";
+	}
+	
+	@FXML
+	public void accproduct4( MouseEvent e ) { 
+		loadpage("/view/product/product.fxml"); 
+		category = "생활용품";
+	}
+	
 	@FXML// 자유게시 레이블을 클릭했을때 이벤트
-	public void accboard( MouseEvent e ) { loadpage("/view/board/board.fxml"); System.out.println("게시판 출력");}
+	public void accboard( MouseEvent e ) { 
+		loadpage("/view/board/board.fxml"); 
+		System.out.println("게시판 출력");
+	}
 	
 	@FXML// 회원정보 레이블을 클릭했을때 이벤트
-	public void accinfo( MouseEvent e ) { loadpage("/view/home/info.fxml"); }
+	public void accinfo( MouseEvent e ) { 
+		loadpage("/view/home/info.fxml"); 
+	}
 	
 	@FXML// 회원수정 레이블을 클릭했을때 이벤트
-	public void accupdate( MouseEvent e ) { loadpage("/view/home/update.fxml"); }
+	public void accupdate( MouseEvent e ) { 
+		loadpage("/view/home/update.fxml");
+	}
 	
 	
 	public void loadpage( String page ) {
@@ -68,6 +109,7 @@ public class Home implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		lblloginid.setText( Login.member.getMid()+" 님" );
 		lblpoint.setText("포인트 : "+ Login.member.getMpoint()+" 점");
+		loadpage("/view/chatting.fxml");
 	}
 	
 	@FXML // 로그아웃 레이블를 클릭했을때 이벤트
