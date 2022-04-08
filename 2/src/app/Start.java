@@ -1,5 +1,8 @@
 package app;
 
+import controller.Chatting;
+import controller.login.Login;
+import dao.RoomDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +34,19 @@ public class Start extends Application{
 		Font.loadFont(getClass().getResourceAsStream("SANGJU Gotgam.ttf"), 14);
 		// 외부 스타일
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
+		// 종료
+		stage.setOnCloseRequest(e ->{
+			if (Login.member != null) {
+				if (Chatting.selectroom != null) {
+					RoomDao.roomDao.roomlivedelete(Login.member.getMid());
+					
+					RoomDao.roomDao.roomdelete(Chatting.selectroom.getRonum());
+				}
+				
+				Chatting.selectroom = null;
+			}
+		});
 		
 		stage.setTitle("이젠마켓");
 		stage.show();

@@ -68,7 +68,7 @@ public class Signuppane implements Initializable {
     	
     	// 현재 날짜 가져오기
     	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    	String cine = dateFormat.format(new Date());
+    	String since = dateFormat.format(new Date());
     	
     	// 유효성 검사
     		// id 중복체크
@@ -106,7 +106,7 @@ public class Signuppane implements Initializable {
     	
     	// 모든 유효성 검사 통과 시 DB에 저장
     	
-    	Member member = new Member(0, id, pw, email, address, 0, cine);
+    	Member member = new Member(0, id, pw, email, address, 0, since);
     	
     	boolean result = MemberDao.memberDao.signup(member);
     	
@@ -118,7 +118,7 @@ public class Signuppane implements Initializable {
     		alert.setHeaderText("가입을 축하합니다.");
     		alert.setContentText("회원가입 성공");
     		alert.showAndWait();
-    		Login.instance.loadpage("view/login/login.fxml");
+    		Login.instance.loadpage("/view/login/loginpane.fxml");
     	} else {
     		labelconfirm.setText("회원가입 실패");
     		System.err.println("가입 실패");

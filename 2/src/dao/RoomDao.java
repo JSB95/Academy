@@ -134,5 +134,26 @@ public class RoomDao {
 		return false;
 	}
 	
+	public boolean roomdelete (int ronum) {
+		String sql = "SELECT * FROM roomlive where ronum =? ";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, ronum);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return false;
+			} else {
+				String sql2 = "DELETE FROM room WHERE ronum = ?";
+				ps = con.prepareStatement(sql2);
+				ps.setInt(1, ronum);
+				ps.executeUpdate();
+				return true;
+			}
+		} catch (Exception e) {
+			System.err.println("ROOMDELETE ERROR : " + e);
+		}
+		return false;
+	}
+	
 	
 }

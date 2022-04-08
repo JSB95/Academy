@@ -56,7 +56,7 @@ public class Chatting implements Initializable{
     
     public Server server;
     
-    public Room selectroom;
+    public static Room selectroom;
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public void show() {
@@ -136,11 +136,11 @@ public class Chatting implements Initializable{
     		public void run() {
     			try {
     				socket = new Socket(ip, port);
-    				send(Login.member.getMid() + "님 입장했습니다.");
+    				send(Login.member.getMid() + "님 입장했습니다.\n");
     				receive();
     			} catch (Exception e) {
     				System.err.println("CLIENTSTART ERROR : " + e);
-    				e.printStackTrace();
+    				clientstop();
     			}
     		}
     	};
@@ -167,6 +167,7 @@ public class Chatting implements Initializable{
     				outputStream.flush();
     			} catch (Exception e) {
     				//System.err.println("SEND ERROR : " + e);
+    				clientstop();
     			}
     		}
     		
@@ -186,6 +187,7 @@ public class Chatting implements Initializable{
     		}
     	} catch (Exception e) {
     		System.err.println("RECEIVE ERROR : " + e);
+    		clientstop();
     	}
     	
     }
@@ -226,15 +228,24 @@ public class Chatting implements Initializable{
     		btnadd.setDisable(false);
     		roomtable.setDisable(false);
     		
+    		RoomDao.roomDao.roomlivedelete(Login.member.getMid());
+    		
+    		boolean result = RoomDao.roomDao.roomdelete(selectroom.getRonum());
+    		if (result) {
+    			server.serverstop();
+    		}
+    		
     		selectroom = null;
     		lblselect.setText("현재 선택된 방 : ");
+    		
+    		show();
     	}
 
     }
 
     @FXML
     void send(ActionEvent event) {
-    	String msg = txtmsg.getText() + "\n";
+    	String msg = Login.member.getMid() + ":" + txtmsg.getText() + "\n";
     	send (msg);
     	txtmsg.setText("");
     	txtmsg.requestFocus();

@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -30,6 +29,7 @@ public class Server {
 			
 		} catch (Exception e) {
 			System.err.println("SERVERSTART ERROR : " + e);
+			serverstop();
 		}
 		
 		Runnable runnable = new Runnable() {
@@ -46,6 +46,7 @@ public class Server {
 				} catch (Exception e) {
 					// TODO: handle exception
 					System.err.println("SERVERSTART_RUN ERROR : " + e);
+					serverstop();
 				}
 				
 				
@@ -57,14 +58,19 @@ public class Server {
 		threadpool.submit(runnable);
 	}
 	
-	public void serverstop() throws IOException {
+	public void serverstop() {
 		
-		for (Client client : clientlist) {
-			client.socket.close();
+		try {
+			for (Client client : clientlist) {
+				client.socket.close();
+			}
+			serverSocket.close();
+			
+			
+			threadpool.shutdown();
+		} catch (Exception e) {
+			System.err.println("SERVERSTOP ERROR : " + e);
 		}
-		serverSocket.close();
-		
-		threadpool.shutdown();
 		
 	}
 	
@@ -99,6 +105,7 @@ public class Server {
 						}
 					} catch (Exception e) {
 						System.err.println("RECEIVE ERROR : " + e);
+						serverstop();
 					}
 					
 				}
@@ -122,7 +129,8 @@ public class Server {
 						outputStream.write(msg.getBytes());
 						
 					} catch (Exception e) {
-						System.err.println("SEND ERROR : " + e);
+						//System.err.println("SEND ERROR : " + e);
+						serverstop();
 					}
 					
 				}
