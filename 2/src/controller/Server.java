@@ -1,41 +1,32 @@
 package controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import dto.Client;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 
-public class Server implements Initializable{
+public class Server {
 	
-	@FXML
-    private Button btnserver;
-    @FXML
-    private TextArea txtserver;
+	public Vector<Client> clientlist = new Vector<>();
 	
-	public static Vector<Client> clientlist = new Vector<>();
-	
-	public static ExecutorService threadpool;
+	public ExecutorService threadpool;
 	
 	ServerSocket serverSocket;
 	
-	public void serverstart() {
+	
+	public void serverstart(String ip, int port) {
+		
 		try {
 			
 			serverSocket = new ServerSocket();
 			
-			serverSocket.bind(new InetSocketAddress("127.0.0.1",1234));
+			serverSocket.bind(new InetSocketAddress(ip,port));
 			
 		} catch (Exception e) {
 			System.err.println("SERVERSTART ERROR : " + e);
@@ -77,25 +68,70 @@ public class Server implements Initializable{
 		
 	}
 	
-	@FXML
-	void server(ActionEvent event) throws IOException {
-		if (btnserver.getText().equals("서버 실행")) {
-			txtserver.appendText("서버 실행\n");
-			serverstart();
-			btnserver.setText("서버 중지");
-		} else {
-			serverstop();
-			txtserver.appendText("서버 중지\n");
-			btnserver.setText("서버 실행");
-		}
-	}
+	// 중첩 클래스
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+	public class Client {
 		
-		txtserver.setDisable(true);
+		public Socket socket;
 		
-	}
+		public Client (Socket socket) {
+			this.socket = socket;
+			receive();
+		}
+		
+		// 서버로 메시지 받는 메소드
+		
+		public void receive() {
+			Runnable runnable = new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						while (true) {
+							InputStream inputStream = socket.getInputStream();
+							byte[] bytes = new byte[9999];
+							inputStream.read(bytes);
+							String msg = new String(bytes);
+							for (Client client : clientlist) {
+								client.send(msg);
+							}
+						}
+					} catch (Exception e) {
+						System.err.println("RECEIVE ERROR : " + e);
+					}
+					
+				}
+			};
+			
+			threadpool.submit(runnable);
+		}
+		
+		// 서버가 메시지를 보내는 메소드
+		public void send(String msg) {
+			
+			Runnable runnable = new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					
+					try {
+						
+						OutputStream outputStream = socket.getOutputStream();
+						outputStream.write(msg.getBytes());
+						
+					} catch (Exception e) {
+						System.err.println("SEND ERROR : " + e);
+					}
+					
+				}
+			};
+			
+			threadpool.submit(runnable);
+			
+		}
+		
+	} // public class end
 
 }
