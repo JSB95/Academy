@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import dto.Member;
 
@@ -191,6 +194,58 @@ public class MemberDao {
 		}
 		return null;
 	}
+	
+	public int counttotal (String tname) {
+		String sql = "SELECT COUNT(*) FROM " + tname;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			
+		}
+		return 0;
+	}
+	
+	public Map<String, Integer> datetotal(String tname, String date){
+		
+		Map<String, Integer> map = new TreeMap<>();
+		String sql = "SELECT SUBSTRING_INDEX( " + date + ", ' ', 1), count(*) FROM " + tname + " GROUP BY SUBSTRING_INDEX( + " + date + ", ' ', 1)";
+		try {
+			
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				map.put(rs.getString(1), rs.getInt(2));
+			}
+			return map;
+			
+		} catch (Exception e) {
+			System.err.println("DATETOTAL ERROR : " + e);
+		}
+		return null;
+	}
+	
+	public Map<String, Integer> countcategory(){
+		Map<String, Integer> map = new HashMap<>();
+		String sql = "SELECT pcategory, count(*) FROM javafx.product GROUP BY pcategory";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				map.put(rs.getString(1), rs.getInt(2));
+			}
+			return map;
+		} catch (Exception e) {
+			System.err.println("COUNTCATEGORY ERROR : " + e);
+		}
+		return null;
+	}
+	
+	
 	
 	
 

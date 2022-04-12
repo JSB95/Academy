@@ -51,6 +51,10 @@ public class Home implements Initializable {
 	private Label lblproduct3;
 	@FXML
 	private Label lblproduct4;
+	@FXML
+	private Label lblhome;
+	@FXML
+	private Label lblrecord;
 	
 	@FXML
 	private BorderPane borderpane;
@@ -95,6 +99,14 @@ public class Home implements Initializable {
 	@FXML// 회원수정 레이블을 클릭했을때 이벤트
 	public void accupdate( MouseEvent e ) { 
 		loadpage("/view/home/update.fxml");
+	}
+	@FXML
+	public void acchome (MouseEvent e) {
+		loadpage("/view/cahtting.fxml");
+	}
+	@FXML
+	public void accrecord (MouseEvent e) {
+		loadpage("/view/record.fxml");
 	}
 	
 	

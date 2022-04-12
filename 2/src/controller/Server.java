@@ -45,8 +45,8 @@ public class Server {
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
-					System.err.println("SERVERSTART_RUN ERROR : " + e);
-					serverstop();
+//					System.err.println("SERVERSTART_RUN ERROR : " + e);
+//					serverstop();
 				}
 				
 				
@@ -104,8 +104,8 @@ public class Server {
 							}
 						}
 					} catch (Exception e) {
-						System.err.println("RECEIVE ERROR : " + e);
-						serverstop();
+//						System.err.println("RECEIVE ERROR : " + e);
+//						serverstop();
 					}
 					
 				}
@@ -129,8 +129,8 @@ public class Server {
 						outputStream.write(msg.getBytes());
 						
 					} catch (Exception e) {
-						//System.err.println("SEND ERROR : " + e);
-						serverstop();
+//						System.err.println("SEND ERROR : " + e);
+//						serverstop();
 					}
 					
 				}

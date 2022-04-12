@@ -139,8 +139,8 @@ public class Chatting implements Initializable{
     				send(Login.member.getMid() + "님 입장했습니다.\n");
     				receive();
     			} catch (Exception e) {
-    				System.err.println("CLIENTSTART ERROR : " + e);
-    				clientstop();
+//    				System.err.println("CLIENTSTART ERROR : " + e);
+//    				clientstop();
     			}
     		}
     	};
@@ -152,7 +152,7 @@ public class Chatting implements Initializable{
     	try {
     		socket.close();
     	} catch (Exception e) {
-    		System.err.println("CLIENTSTOP ERROR : " + e);
+//    		System.err.println("CLIENTSTOP ERROR : " + e);
     	}
     }
     
@@ -186,8 +186,8 @@ public class Chatting implements Initializable{
 	    		txtcontent.appendText(msg);
     		}
     	} catch (Exception e) {
-    		System.err.println("RECEIVE ERROR : " + e);
-    		clientstop();
+//    		System.err.println("RECEIVE ERROR : " + e);
+//    		clientstop();
     	}
     	
     }
@@ -234,7 +234,7 @@ public class Chatting implements Initializable{
     		if (result) {
     			server.serverstop();
     		}
-    		
+    		System.out.println(result);
     		selectroom = null;
     		lblselect.setText("현재 선택된 방 : ");
     		

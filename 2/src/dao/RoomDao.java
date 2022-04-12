@@ -66,7 +66,14 @@ public class RoomDao {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				Room room = new Room(rs.getInt(1), rs.getString(2), rs.getString(3), 0);
+				String sql2 = "SELECT COUNT(*) FROM roomlive WHERE ronum = " + rs.getInt(1);
+				ps = con.prepareStatement(sql2);
+				ResultSet rs2 = ps.executeQuery();
+				int count = 0;
+				if (rs2.next()) {
+					count = rs2.getInt(1);
+				}
+				Room room = new Room(rs.getInt(1), rs.getString(2), rs.getString(3), count);
 				roomlist.add(room);
 			}
 			return roomlist;
