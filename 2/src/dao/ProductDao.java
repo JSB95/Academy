@@ -55,8 +55,11 @@ public class ProductDao {
 		
 		try {
 			String sql = null;
-			if (search == null) {
-				
+			if (category == null && search == null) {
+				sql = "SELECT * FROM product";
+				ps = con.prepareStatement(sql);
+			} else if (search == null) {
+
 				sql = "SELECT * FROM product WHERE pcategory = ? ORDER BY pnum DESC";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, category);
