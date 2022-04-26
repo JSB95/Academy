@@ -1,0 +1,316 @@
+@charset "EUC-KR";
+
+*{
+	font-family: "Nanum Gothic";
+}
+
+body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, th, td, form, fieldset, legend, input, textarea, button, select {
+    margin: 0;
+    padding: 0;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	color: #eeeeee;
+}
+
+.tophead{
+	font-size: 12px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.sidemenu{
+	position: fixed;
+	left: 10px;
+	margin-top: 80px;
+}
+.content{
+	margin-top: 80px;
+}
+
+.sidemenu #l{
+	font-size: 11px;
+}
+
+.card{
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	border: 0px;
+}
+
+.item_main{
+	margin-top: 100px;
+}
+
+li{
+	list-style-type: none;
+	font-weight: bold;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+#logo{
+	font-size: 30px;
+	font-weight: bold;
+}
+#logoli{
+	margin-bottom: 40px;
+}
+.card-body{
+	padding: 10px;
+	padding-left: 0px;
+}
+.item{
+	margin-bottom: 5px;
+	
+}
+
+.title{
+	font-size: 12px;
+}
+
+.price{
+	font-size: 14px;
+}
+
+.t-info{
+	font-size: 17px;
+	font-weight: normal;
+	color: #999;
+	margin-bottom: 70px;
+	text-align: center;
+}
+
+.f-inner{
+	margin-top: 20px;
+}
+
+#f-icon{
+	position: absolute;
+	right: 0;
+}
+
+.f-title{
+	font-size: 14px;
+	font-weight: bold;
+	color: #999;
+	margin-bottom: 10px;
+}
+
+#f-info ul li{
+	float: left;
+	font-size: 13px;
+	
+}
+
+.csnumber{
+	font-size: 23px;
+	color: #2e2e2e;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.cskakao{
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#f-info .companyinfo span{
+	margin-right: 10px;
+	font-size: 11px;
+}
+
+.f-layout{
+	position: relative;
+	float: right;
+	width: 100%;
+	height: 480px;
+
+}
+#footer{
+	position: relative;
+}
+#footer .inner{
+	padding-right: 2%;
+	padding-left: 2.5%;
+	overflow: hidden;
+	position: relative;
+}
+
+.login{
+	padding: 49px 39px;
+	color: #2e2e2e;
+	width: 966px;
+}
+
+.login fieldset{
+	position: relative;
+	width: 370px;
+	margin: 0 auto;
+	padding: 0 0 0 9px;
+}
+
+.login fieldset .id{
+	overflow: hidden;
+	display: block;
+	width: 241px;
+	margin: 0 0 8px;
+	border-bottom: 1px soild #e8e8e8;
+	color: #2e2e2e;
+}
+fieldset{
+	border: 0;
+	vertical-align: top;
+}
+
+.login fieldset input[type=text]{
+	width: 95%;
+	height: 28px;
+	line-height: 28px;
+	padding: 2px 2px 2px 7px;
+	border: 0 none;
+	color: #8F8F91;
+}
+
+.login fieldset .password{
+	overflow: hidden;
+	display: block;
+	width: 241px;
+	margin: 0 0 8px;
+	border-bottom: 1px soild #e8e8e8;
+	color: #2e2e2e;
+}
+.login fieldset input[type=password]{
+	widows: 95%;
+	height: 28px;
+	line-height: 28px;
+	padding: 2px 2px 2px 7px;
+	border: 0 none;
+	color: #8F8F91;
+}
+.forgot{
+	margin-top: 40px;
+	text-align: center;
+	line-height: 28px;
+	height: 28px;
+	width: 370px;
+	font-size: 11px;
+}
+
+input[type=checkbox] + label{
+	width: 13px;
+	height: 13px;
+	border: 0;
+	margin: 0 4px 0 2px;
+}
+.forgot img{
+	padding-top: 8.5px;
+	margin-right: 5px;
+}
+.forgot span{
+	color: #d8d5d5;
+}
+
+
+.login fieldset > a{
+	position: absolute;
+	top: 0;
+	right: 9px;
+}
+.btnLogin{
+	height: 76px;
+	line-height: 76px;
+}
+
+a.btnLogin{
+	display: inline-block;
+    box-sizing: border-box;
+    width: 100px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+}
+
+.login fieldset .snsArea{
+	padding: 20px 0 20px 0;
+	width: 370px;
+}
+
+.login fieldset .snsArea li{
+	margin: 7px 9px 0 0;
+	padding: 0;
+	background: none;
+}
+.login fieldset ul{
+	overflow: hidden;
+	margin: 0;
+	border: 0;
+}
+
+.login fieldset li {
+    float: left;
+}
+
+
+ul, ol{
+	list-style: none;
+}
+
+
+
+.login fieldset li a{
+	color: #2e2e2e;
+}
+
+img{
+	vertical-align: top;
+	border: 0;
+}
+
+.joinus{
+	text-align: center;
+	height: 50px;
+	widows: 370px;
+	line-height: 50px;
+	background: #84868b;
+}
+
+.joinus a{
+	color: #fff;
+	font-size: 14px;
+}
+
+.joinus p{
+	text-align: center;
+}
+
+.login fieldset #noMemberWrap{
+	border-top: 0;
+	margin-top: 40px;
+}
+
+.login fieldset .link{
+	text-align: center;
+	height: 50px;
+	width: 370px;
+	line-height: 50px;
+}
+
+.xans-myshop-orderhistorynologin.ec-base-box.typeThin {
+    padding: 49px 0;
+}
+
+.displaynone{
+	display: none !important;
+}

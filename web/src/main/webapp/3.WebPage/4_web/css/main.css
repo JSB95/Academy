@@ -1,0 +1,47 @@
+@charset "EUC-KR";
+
+*{
+	padding: 0px;
+	margin: 0px;
+}
+a{text-decoration: none; color: black;}
+a:hover{color: orange;}
+
+.header_logo{
+	font-size: 20px;
+}
+@font-face {
+    font-family: 'SuncheonB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+	font-family: 'SuncheonB'; 
+	font-size: 12px;
+}
+.item .title{
+	font-size: 10px;
+}
+.item .content{
+	font-size: 8px;
+	margin-bottom: 50px;
+}
+.item .price{
+	color:gray;
+	text-decoration: line-through;
+	
+}
+
+.item .price2{
+	font-size: 20px;
+}
+
+.titleline{
+	border-bottom: solid 5px orange;
+	width: 200px; 
+	margin: 0 auto;
+}
+.form-control{
+	background-color: white !important; 
+}
