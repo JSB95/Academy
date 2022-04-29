@@ -25,16 +25,16 @@
 	%>
 	
 	<%
-		while (true){
+
 			for (int i = 0; i < board.length; i++){
-				while(true){
+
 					if (request.getParameter(i + "") != null && request.getParameter(i+"").equals(i+"") && board[i].equals("[  ]")){
 						out.print(i+"번 선택");
 						board[i] = "[ O ]";
 						count++;
 						break;
 				}
-			}
+
 				while (true){
 					Random random = new Random();
 					int com = random.nextInt(9);
@@ -79,9 +79,9 @@
 			
 			if(count == 9){
 				out.println("무승부");
-				break;
+
 			}
-		}
+
 	
 		if(request.getParameter("reset") != null){
 			for (int i = 0; i < board.length; i++){
