@@ -4,22 +4,28 @@ $(function(){
 		// 1. HTML 태그내 값 가져오기 
 		let mid=document.getElementById("mid").value;
 		// 2. HTML 태그id 가져오기
-		let idcheck = document.getElementById("idchk")
+		let idchk = document.getElementById("idchk")
 		
 		let idj = /^[a-zA-Z0-9]{5,15}$/; // 한글을 제외한 영문 + 숫자 5~15글자 내
 		
 		if (idj.test(mid)){
 			// idcheck.innerHTML = "영문, 숫자 포함 5~15글자를 입력해주세요";
 			$.ajax({
-				url : "http://192.168.17.24:8080/jspweb/src/main/java/controller/idcheck.java",
+				url : "../idcheck",
 				data : {"mid" : mid},
 				success : function(result){
 					alert("통신 성공");
+					
+					alert("java에서 받은 데이터 : " + result);
+					
+					if (result == 1){
+						idchk.innerHTML = "사용중인 아이디입니다."
+					} 
 				}
 			});
 			
 		} else {
-			idcheck.innerHTML = "영문, 숫자 포함 5~15글자를 입력해주세요";
+			idchk.innerHTML = "영문, 숫자 포함 5~15글자를 입력해주세요";
 		}
 	});
 	

@@ -32,6 +32,7 @@ public class idcheck extends HttpServlet {
 		
 		System.out.println("JS와 통신");
 		
+		
 		response.getWriter().print(1);
 		response.getWriter().print(2);
 		
