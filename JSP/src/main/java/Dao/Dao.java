@@ -27,6 +27,7 @@ public class Dao {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jsptest?serverTimezone=UTC", "root", "1234");
+			System.out.println("Connection");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.err.println("MemberDao ERROR" + e);
