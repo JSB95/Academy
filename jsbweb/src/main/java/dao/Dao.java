@@ -14,10 +14,9 @@ public class Dao {
 	public Dao() {
 		
 		try {
-			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspweb?serverTimezone=UTC","root","1234");
-	
+			System.out.println("Connection");
 		} catch (Exception e) {
 			System.err.println("DB Connect error : " + e);
 		}

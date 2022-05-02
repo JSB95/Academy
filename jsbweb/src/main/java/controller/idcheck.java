@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.MemberDao;
+
 /**
  * Servlet implementation class idcheck
  */
@@ -31,13 +33,15 @@ public class idcheck extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String mid = request.getParameter("mid");
 		
-		System.out.println("JS와 통신");
 		
+		boolean result = MemberDao.getmemberDao().idcheck(mid);
+		if (result) {
+			response.getWriter().print(1);
+		} else {
+			response.getWriter().print(2);
+		}
 		
-		response.getWriter().print(1);
-		response.getWriter().print(2);
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

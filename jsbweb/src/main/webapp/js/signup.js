@@ -14,13 +14,15 @@ $(function(){
 				url : "../idcheck",
 				data : {"mid" : mid},
 				success : function(result){
-					alert("통신 성공");
+//					alert("통신 성공");
 					
-					alert("java에서 받은 데이터 : " + result);
+	//				alert("java에서 받은 데이터 : " + result);
 					
 					if (result == 1){
 						idchk.innerHTML = "사용중인 아이디입니다."
-					} 
+					} else {
+						idchk.innerHTML = "사용 가능한 아이디입니다."
+					}
 				}
 			});
 			
