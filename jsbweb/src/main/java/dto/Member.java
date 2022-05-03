@@ -1,17 +1,17 @@
 package dto;
 
-public class member {
+public class Member {
 	
 	int mno;
 	String mid, mpassword, mname, mphone, memail, maddress;
 	int mpoint;
 	String mdate;
 	
-	public member() {
+	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public member(int mno, String mid, String mpassword, String mname, String mphone, String memail, String maddress,
+	public Member(int mno, String mid, String mpassword, String mname, String mphone, String memail, String maddress,
 			int mpoint, String mdate) {
 		super();
 		this.mno = mno;
@@ -96,6 +96,15 @@ public class member {
 	public void setMdate(String mdate) {
 		this.mdate = mdate;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [mno=" + mno + ", mid=" + mid + ", mpassword=" + mpassword + ", mname=" + mname + ", mphone="
+				+ mphone + ", memail=" + memail + ", maddress=" + maddress + ", mpoint=" + mpoint + ", mdate=" + mdate
+				+ "]";
+	}
+	
+	
 	
 	
 
