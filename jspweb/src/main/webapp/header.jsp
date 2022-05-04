@@ -31,7 +31,7 @@
 		<span> <%=loginid %> 님</span>
 		<a href = "logout"> 로그아웃 </a>
 		<a href = "/jspweb/member/memberinfo.jsp"> 회원정보 </a>
-	
+	<% } %>
 	</div>
 	<!-- 부트스트랩 js cdn -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
