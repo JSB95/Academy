@@ -6,21 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MemberDao;
 import dto.Member;
 
 /**
- * Servlet implementation class signup
+ * Servlet implementation class update
  */
-@WebServlet("/signup")
-public class signup extends HttpServlet {
+@WebServlet("/update")
+public class update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public signup() {
+    public update() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,35 +41,58 @@ public class signup extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
-		String mid = request.getParameter("mid");
-		String mpassword = request.getParameter("mpassword");
+		String oldpassword = request.getParameter("oldpassword");
+		String newpassword = request.getParameter("newpassword");
+		
+		int mno = Integer.parseInt(request.getParameter("mno"));
 		String mname = request.getParameter("mname");
 		String mphone = request.getParameter("mphone");
 		String memail = request.getParameter("memail");
 		String memailaddress = request.getParameter("memailaddress");
-		
 		String email = memail + "@" + memailaddress;
-		
 		String maddress1 = request.getParameter("maddress1");
 		String maddress2 = request.getParameter("maddress2");
 		String maddress3 = request.getParameter("maddress3");
 		String maddress4 = request.getParameter("maddress4");
+		String address = maddress1 + "_" + maddress2 + "_" + maddress3 + "_" + maddress4;
+		Member member = null;
 		
-		String maddress = maddress1 + "_" + maddress2 + "_" + maddress3 + "_" + maddress4;
 		
-		Member member = new Member(0, mid, mpassword, mname, mphone, email, maddress, 0, null);
 		
-		System.out.println(member.toString());
 		
-		boolean result = MemberDao.getmemberDao().signup(member);
+		
+		
+		
+		if (oldpassword.equals("") || newpassword.equals("")) {
+			
+			member = new Member(mno, null, null, mname, mphone, email, address, 0, null);
+			
+		} else {
+			
+			HttpSession session = request.getSession();
+			String mid = (String)session.getAttribute("login");
+			
+			boolean pw_result = MemberDao.getmemberDao().passwordchk(mid, oldpassword);
+			
+			if (pw_result) {
+				member = new Member(mno, null, newpassword, mname, mphone, email, address, 0, null);
+			} else {
+				response.sendRedirect("/jspweb/member/update.jsp?result=3");
+			}
+		}
+			
+		
+		
+		boolean result = MemberDao.getmemberDao().update(member);
 		
 		if (result) {
-			response.sendRedirect("/jspweb/member/signupsuccess.jsp");
+			response.sendRedirect("/jspweb/member/update.jsp?result=1");
 		} else {
-			response.sendRedirect("/jspweb/member/signuperror.jsp");
+			response.sendRedirect("/jspweb/member/update.jsp?result=2");
 		}
 		
-		doGet(request, response);
+		
+		
 	}
 
 }

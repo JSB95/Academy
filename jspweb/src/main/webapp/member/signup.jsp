@@ -157,9 +157,7 @@
 		             			</ul>
 		            		</div>
 		          		</div>
-		          		<div class="signup">
-							<a href="javascript:signup()"></a>
-						</div>
+		          		<button onclick="signup()" type="button">가입하기</button>
 					</div>
 	
 				</div>

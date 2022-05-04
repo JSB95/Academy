@@ -12,9 +12,9 @@ function id_duplicate_chk(){
 			data : {"mid" : mid},
 			success : function(result){
 				if (result == 1){
-					alert("이미 사용중인 아이디입니다.");
+					alert("이미 사용중인 아이디입니다."); pass[0] = false;
 				} else {
-					alert("사용 가능한 아이디입니다.");
+					alert("사용 가능한 아이디입니다."); pass[0] = true;
 				}
 			}
 		});
@@ -25,34 +25,6 @@ function id_duplicate_chk(){
 
 
 $(function(){
-	
-	$("#mid").keyup(function(){
-		// 1. HTML 태그내 값 가져오기 
-		let mid=document.getElementById("mid").value;
-		// 2. HTML 태그id 가져오기
-		let idchk = document.getElementById("idchk")
-		
-		let idj = /^[a-zA-Z0-9]{5,15}$/; // 한글을 제외한 영문 + 숫자 5~15글자 내
-		
-		if (idj.test(mid)){
-			// idcheck.innerHTML = "영문, 숫자 포함 5~15글자를 입력해주세요";
-			$.ajax({
-				url : "../idcheck",
-				data : {"mid" : mid},
-				success : function(result){
-
-					if (result == 1){
-						idchk.innerHTML = "사용중인 아이디입니다."; pass[0] = false;
-					} else {
-						idchk.innerHTML = "사용 가능한 아이디입니다."; pass[0] = true;
-					}
-				}
-			});
-			
-		} else {
-			idchk.innerHTML = "영문, 숫자 포함 5~15글자를 입력해주세요";
-		}
-	});
 	
 	$("#mpassword").keyup(function(){
 		
@@ -247,4 +219,8 @@ function sample4_execDaumPostcode() {
             }
         }
     }).open();
+}
+
+function passwordchange(){
+	$("#passwordbox").css("display","block");
 }

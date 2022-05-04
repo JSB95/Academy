@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MemberDao;
-import dto.Member;
 
 /**
- * Servlet implementation class signup
+ * Servlet implementation class passwordcheck
  */
-@WebServlet("/signup")
-public class signup extends HttpServlet {
+@WebServlet("/passwordchk")
+public class passwordchk extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public signup() {
+    public passwordchk() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +29,8 @@ public class signup extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		
 	}
 
 	/**
@@ -38,34 +38,16 @@ public class signup extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
 		
 		String mid = request.getParameter("mid");
 		String mpassword = request.getParameter("mpassword");
-		String mname = request.getParameter("mname");
-		String mphone = request.getParameter("mphone");
-		String memail = request.getParameter("memail");
-		String memailaddress = request.getParameter("memailaddress");
 		
-		String email = memail + "@" + memailaddress;
-		
-		String maddress1 = request.getParameter("maddress1");
-		String maddress2 = request.getParameter("maddress2");
-		String maddress3 = request.getParameter("maddress3");
-		String maddress4 = request.getParameter("maddress4");
-		
-		String maddress = maddress1 + "_" + maddress2 + "_" + maddress3 + "_" + maddress4;
-		
-		Member member = new Member(0, mid, mpassword, mname, mphone, email, maddress, 0, null);
-		
-		System.out.println(member.toString());
-		
-		boolean result = MemberDao.getmemberDao().signup(member);
-		
+		boolean result = MemberDao.getmemberDao().passwordchk(mid, mpassword);
+
 		if (result) {
-			response.sendRedirect("/jspweb/member/signupsuccess.jsp");
+			response.getWriter().print(1);
 		} else {
-			response.sendRedirect("/jspweb/member/signuperror.jsp");
+			response.getWriter().print(2);
 		}
 		
 		doGet(request, response);
