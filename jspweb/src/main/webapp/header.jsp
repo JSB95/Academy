@@ -7,11 +7,9 @@
 <title>ezen 쇼핑몰</title>
 	
 	<!-- 부트스트랩 css cdn -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
 	<!-- 사용자 정의 CSS -->
 	<link href="/jspweb/css/main.css" rel = "stylesheet">
-	
-   
 	
 
 </head>
@@ -49,7 +47,6 @@
 			<a href = "/jspweb/member/myshopping.jsp"> 나의쇼핑 </a>
 			
 		<% } %>	
-		<a href="/jspweb/board/boardlist.jsp">자유게시판</a>
 		
 	</div>
 	
@@ -63,11 +60,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- 사용자정의 js -->
 	<script src="/jspweb/js/main.js" type="text/javascript"></script>
-	
 	<!-- jQuery 최신 CDN -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	
-    
 
 </body>
 </html>

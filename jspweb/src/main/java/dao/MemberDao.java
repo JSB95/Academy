@@ -15,35 +15,6 @@ public class MemberDao extends Dao{
 		return memberDao;
 	}
 	
-	// 회원번호 출력
-	public int getmno(String mid) {
-		String sql = "SELECT mno FROM member WHERE mid = '" + mid + "'";
-		try {
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				return rs.getInt(1);
-			}
-		} catch (Exception e) {
-			System.err.println("getmno error : " + e);
-		}
-		return 0;
-	}
-	
-	public String getmid(int mno) {
-		String sql = "SELECT mid FROM member where mno = '" + mno + "'";
-		try {
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				return rs.getString(1);
-			}
-		} catch (Exception e) {
-			System.err.println("getmid error : " + e);
-		} 
-		return null;
-	}
-	
 	// 아이디 중복체크
 	public boolean idcheck(String mid) {
 		
