@@ -24,6 +24,7 @@
 				
 					<%@include file = "infosidebar.jsp" %>
 				
+				
 				</div>
 				
 				<div class="col-md-9">

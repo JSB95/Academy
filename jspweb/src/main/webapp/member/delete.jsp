@@ -20,6 +20,7 @@
 			<div class="col-md-3">
 			
 				<%@include file = "infosidebar.jsp" %>
+				
 			
 			</div>
 			

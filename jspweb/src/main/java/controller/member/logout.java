@@ -30,6 +30,7 @@ public class logout extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.setAttribute("login", null);
+		session.setAttribute("mno", null);
 		response.sendRedirect("/jspweb/main.jsp");
 		
 	}

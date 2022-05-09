@@ -1,3 +1,4 @@
+<%@page import="dao.MemberDao"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -30,11 +31,15 @@
 			
 			<%
 			
+			
+				String midd = (String)session.getAttribute("login");
 				
+				int mno = MemberDao.getmemberDao().getmno(midd);
 				
-				ArrayList<Board> boardlist = BoardDao.getboardDao().getboardlist();	
-				
-				
+				session.setAttribute("mno", mno);
+
+				ArrayList<Board> boardlist = BoardDao.getboardDao().getboardlist2(mno);
+					
 				Date date = new Date();
 				
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

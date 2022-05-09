@@ -41,6 +41,7 @@ public class login extends HttpServlet {
 		
 		String mid = request.getParameter("mid");
 		String mpassword = request.getParameter("mpassword");
+
 		
 		int result = MemberDao.getmemberDao().login(mid, mpassword);
 		

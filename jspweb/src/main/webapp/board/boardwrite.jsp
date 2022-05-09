@@ -21,7 +21,7 @@
 	<div class="container">
 		<a href="boardlist.jsp"><button>글목록</button></a>
 		<h3>글쓰기</h3>
-		<form action="../write" method="post" enctype="multipart/form-data">
+		<form action="../board/write" method="post" enctype="multipart/form-data">
 			제목 : <input type="text" name="btitle"><br>
 			<textarea name="bcontent" id="summernote"></textarea><br>
 			첨부파일 : <input type="file" name="bfile"><br>

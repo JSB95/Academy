@@ -25,6 +25,7 @@ public class BoardDao extends Dao{
 			ps.setString(2, board.getBcontent());
 			ps.setInt(3, board.getMno());
 			ps.setString(4, board.getBfile());
+			System.out.println(board);
 			ps.executeUpdate();	
 			return true;
 			
@@ -36,29 +37,94 @@ public class BoardDao extends Dao{
 	// 2. 모든 게시물 출력 메소드 [ 인수 : x  // 추후기능 = 검색 : 조건 ]
 	public ArrayList<Board> getboardlist() {
 		
-		ArrayList<Board> boarlist = new ArrayList<>();
-		String sql = "SELECT * FROM board ORDER BY bno DESC";
+		ArrayList<Board> boardlist = new ArrayList<>();
+		String sql = "SELECT * FROM board WHERE mno ORDER BY bno DESC ";
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getString(7), null);
-				boarlist.add(board);
+				boardlist.add(board);
 			}
-			return boarlist;
+			return boardlist;
 		} catch (Exception e) {
 			System.err.println("getboardlist error : " + e);
 		}
 		return null; 
 	}
+	
+	public ArrayList<Board> getboardlist2(int mno){
+		ArrayList<Board> boardlist = new ArrayList<Board>();
+		String sql = "SELECT * FROM board WHERE mno='" + mno + "'ORDER BY bno DESC";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getString(7), null);
+				boardlist.add(board);
+			}
+			return boardlist;
+		} catch (Exception e) {
+			System.err.println("getboardlist2 error : " + e);
+		}
+		return null;
+	}
 	// 3. 개별 게시물 출력 메소드 [ 인수 : 게시물번호 ]
-	public Board getboard() { return null; }
+	public Board getboard(int bno) {
+		String sql = "SELECT * FROM board WHERE bno='" + bno + "'";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				Board board = new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getString(7), null);
+				return board;
+			}
+		} catch (Exception e) {
+			System.err.println("getboard error : " + e);
+		}
+		return null; 
+	}
 	// 4. 게시물 수정 메소드 	[ 인수 : 수정할 게시물번호  / 수정된 내용 ]
-	public boolean update( Board board ) { return false; }
+	public boolean update( Board board ) { 
+		String sql = "UPDATE board SET btitle=?, bcontent=?, bfile=? WHERE bno=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getBtitle());
+			ps.setString(2, board.getBcontent());
+			ps.setString(3, board.getBfile());
+			ps.setInt(4, board.getBno());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("board update error : " + e);
+		}
+		return false; 
+	}
 	// 5. 게시물 삭제 메소드 	[ 인수 : 삭제할 게시물번호 
-	public boolean delete( int bno ) { return false; }
+	public boolean delete( int bno ) {
+		String sql = "DELETE FROM board WHERE bno=" + bno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("delete error : " + e);
+		}
+		return false; 
+	}
 	// 6. 게시물 조회 증가 메소드 	[ 인수 : 증가할 게시물번호 ]
-	public boolean increview( int bno ) { return false; }
+	public boolean increview( int bno ) { 
+		String sql = "UPDATE board SET bview = bview + 1 WHERE bno=" + bno;
+		try {
+			 ps = con.prepareStatement(sql);
+			 ps.executeUpdate();
+			 System.out.println("조회수 증가");
+			 return true;
+		} catch (Exception e) {
+			System.err.println("increview error + " + e);
+		}
+		return false; 
+	}
 	// 7. 댓글 작성 메소드 		[ 인수 : 작성된 데이터들 = dto ]
 	public boolean replywrite() { return false; }
 	// 8. 댓글 출력 메소드 		[ 인수 : x ]
@@ -67,4 +133,15 @@ public class BoardDao extends Dao{
 	public boolean replyupdate() { return false; }
 	// 10. 댓글 삭제 메소드 		[ 인수 : 삭제할 댓글 번호 ] 
 	public boolean replydelete() { return false; }
+	public boolean filedelete(int bno) {
+		String sql = "UPDATE board SET bfile = null WHERE bno=" + bno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("filedelete error :" + e);
+		}
+		return false;
+	}
 }
