@@ -45,3 +45,32 @@ a{
 	font-size: 10px;
 	float: right;
 }
+
+.header_logo{
+	font-size: 40px;
+}
+
+.header_topmenu{
+	font-size: 14px;
+	color: #999999;
+	padding: 20px;
+}
+
+.header_input{
+	border: 0;
+	border-bottom: 1px solid black;
+}
+
+.shoppingbox{
+	font-size: 10px;
+	background-color: #006494;
+	color: white;
+	padding: 2px 5px 2px 5px;
+	border-radius: 10px;
+	margin-right: 10px;
+}
+
+.dropdown:hover .dropdown-menu{
+	display: block;
+}
+

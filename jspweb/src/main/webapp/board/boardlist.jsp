@@ -1,3 +1,4 @@
+<%@page import="dto.Reply"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -43,6 +44,7 @@
 				for (Board board : boardlist) {
 					String date2 = simpleDateFormat.format(simpleDateFormat.parse(board.getBdate()));
 					String date3 = "";
+					int count = BoardDao.getboardDao().getreplylist(board.getBno());
 					if (date1.equals(date2)){
 						date3 = board.getBdate().split(" ")[1];
 					} else {
@@ -52,7 +54,7 @@
 				<!-- 행 전체 링크 -->
 				<tr>
 					<td> <%=board.getBno() %> </td>
-					<td> <a href="boardview.jsp?bno=<%=board.getBno()%>"><%=board.getBtitle()%></a> </td>
+					<td> <a href="boardview.jsp?bno=<%=board.getBno()%>"><%=board.getBtitle()%>(<%=count%>)</a> </td>
 					<td> <%=board.getMid() %> </td>
 					<td> <%=board.getBview() %> </td>
 					<td> <%out.print(date3); %> </td>

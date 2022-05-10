@@ -176,9 +176,32 @@ public class BoardDao extends Dao{
 		return null; 
 	}
 	// 9. 댓글 수정 메소드 		[ 인수 : 수정할 댓글 번호 ]
-	public boolean replyupdate() { return false; }
+	public boolean replyupdate(Reply reply) { 
+		String sql = "UPDATE reply SET rcontent=? WHERE rno=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, reply.getRcontent());
+			ps.setInt(2, reply.getBno());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("reply update error : " + e);
+		}
+		return false; 
+	}
 	// 10. 댓글 삭제 메소드 		[ 인수 : 삭제할 댓글 번호 ] 
-	public boolean replydelete() { return false; }
+	public boolean replydelete(int rno) {
+		String sql = "DELETE FROM reply WHERE rno = " + rno + " OR rindex = " + rno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("replydelte error : " + e);
+		}
+		
+		return false; 
+	}
 	public boolean filedelete(int bno) {
 		String sql = "UPDATE board SET bfile = null WHERE bno=" + bno;
 		try {
@@ -189,5 +212,21 @@ public class BoardDao extends Dao{
 			System.err.println("filedelete error :" + e);
 		}
 		return false;
+	}
+	public int getreplylist(int bno) {
+		String sql = "SELECT COUNT(*) FROM reply WHERE bno =" + bno;
+		try {
+			
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				System.out.println(rs.getInt(1));
+				return rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.err.println("getreplylist error : " + e);
+		}
+		return 0;
 	}
 }

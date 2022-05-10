@@ -78,17 +78,17 @@
 			if (board.getMno() == MemberDao.getmemberDao().getmno(mid)){
 		%>
 			<div class="col-md-2">
-				<a href="delete?bno=<%=board.getBno()%>"><button>삭제</button></a>
+				<a href="delete?bno=<%=board.getBno()%>"><button class="form-control">삭제</button></a>
 			</div>
 			
-			<div class="col-md=2">
-				<a href="boardupdate.jsp?bno=<%=board.getBno()%>"><button>수정</button></a>
+			<div class="col-md-2">
+				<a href="boardupdate.jsp?bno=<%=board.getBno()%>"><button class="form-control">수정</button></a>
 			</div>
 		<%
 			}
 		 %>
 		 	<div class="col-md-2">
-				<a href="boardlist.jsp"><button>목록</button></a>
+				<a href="boardlist.jsp"><button class="form-control">목록</button></a>
 			</div>
 		</div>
 			
@@ -121,7 +121,7 @@
 		<% } %>
 		
 		
-		
+		<!-- 댓글 출력 -->
 		
 		
 		<table id="replytable" class="table">
@@ -131,23 +131,24 @@
 			%>
 			<tr>
 				<td class="replywriter" width="10%"><%=reply.getMid() %> <br>  </td>
-				<td class="replywriter" width="70%" colspan="2"> <%=reply.getRcontent() %> <button class="btn replybtn" onclick="rereplyview(<%=reply.getRno()%>, <%=reply.getBno()%>)">댓글</button></td>
+				<td class="replywriter" width="70%" colspan="2"> <%=reply.getRcontent() %> <button class="btn replybtn" onclick="rereplyview(<%=reply.getRno()%>, <%=reply.getBno()%>, <%=mid %>)">댓글</button></td>
 				<td class="replywriter"  width="10%"> <%=reply.getRdate() %> 
 				<% if (mid != null && mid.equals(reply.getMid())) { %>
 				
-					 <button>수정</button> 
-					 <button>삭제</button> 
+					 <button class="btn replybtn" onclick="replyupdateview(<%=reply.getRno()%>)">수정</button> 
+					 <button type="button" class="btn replybtn" onclick="replydelete(<%=reply.getRno()%>)">삭제</button> 
 				
 				<% } %>
+					
 				 
 				</td>
 			</tr>
 			
 			
+			<!-- 대댓글 -->
 			
 			
-			
-			<tr>	<!-- 대댓글 -->
+			<tr>	
 				<td></td>
 				<td colspan="2" id=<%=reply.getRno() %>></td>
 			</tr>
@@ -163,8 +164,8 @@
 						<span style="float: right;">  <%=rereply.getRdate() %> 
 						
 							<% if (mid != null && mid.equals(rereply.getMid())) { %>
-								<button>수정</button>
-								<button>삭제</button>
+								<button class="btn replybtn">수정</button>
+								<button class="btn replybtn" onclick="replydelete(<%=rereply.getRno()%>)">삭제</button>
 							<% } %>
 							
 						</span> 

@@ -40,7 +40,13 @@ function replywrite(bno){
 	});
 }
 
-function rereplyview(rno, bno){
+function rereplyview(rno, bno, mid){
+	
+	if (mid == "null"){
+		alert("로그인 후 작성이 가능합니다");
+		return;
+	}
+	
 	$("#"+rno).html(
 		'<div class="row">' + 
 			'<div class="col-md-10">' +
@@ -69,4 +75,52 @@ function rereplywrite(rno, bno){
 			}
 		}
 	});
+}
+
+function replydelete( rno ){
+	$.ajax({
+		url : "replydelete" , 
+		data : { "rno" : rno } , 
+		success : function( result ){
+			if( result == 1 ){
+				alert("댓글이 삭제 되었습니다.");
+				$("#replytable").load( location.href+" #replytable"); // 특정 태그 새로고침
+			}
+			else{ alert("삭제 실패(관리자에게 문의)"); } 
+		}
+	});
+}
+
+function replyupdateview(rno){
+	$("#"+rno).html(
+		'<form action="../board/replyupdate" method="post" enctype="multipart/form-data">' +
+			'<div class="row">' +
+				'<div class="col-md-10">'+
+					'<textarea id="rcontent" class="form-control" rows=1></textarea>'+
+				'</div>'+
+				'<div class="col-md-2">'+
+					'<button class="form-control py-4 my-1" onclick="replyupdate(<%=reply.getRno()%>)">수정</button>'+
+				'</div>'+
+			'</div>' +
+		'</form>'
+	);
+}
+
+function replyupdate(rno){
+	
+	alert(rno);
+	
+ 	/*$.ajax({
+		url: "replyupdate",
+		data: {"rno" : rno},
+		success: function(result){
+			if (result == 1){
+				alert("댓글수정완료");
+				$("#rcontent").val("");				
+				$("#replytable").load(location.href + " #replytable");
+			} else {
+				alert("댓글작성실패");
+			}
+		}
+	}); */
 }
