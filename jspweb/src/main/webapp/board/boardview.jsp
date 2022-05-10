@@ -135,7 +135,7 @@
 				<td class="replywriter"  width="10%"> <%=reply.getRdate() %> 
 				<% if (mid != null && mid.equals(reply.getMid())) { %>
 				
-					 <button class="btn replybtn" onclick="replyupdateview(<%=reply.getRno()%>)">수정</button> 
+					 <button class="btn replybtn" onclick="replyupdateview(<%=reply.getRno()%>, <%=reply.getBno()%>)">수정</button> 
 					 <button type="button" class="btn replybtn" onclick="replydelete(<%=reply.getRno()%>)">삭제</button> 
 				
 				<% } %>

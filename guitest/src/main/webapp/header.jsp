@@ -22,13 +22,8 @@
 		<div class="container">
 			<div class="py-3">
 				<div class="row">
-					<div class="col-md-offset-1 col-md-8">
+					<div class="col-md-offset-1 col-md-8 text-center">
 						<a href="main.jsp">상단 로고</a>					
-						<a href="#">스토어</a>
-						<a href="#">Mac</a>
-						<a href="#">iPad</a>
-						<a href="#">iPhone</a>
-						<a href="#">게시판</a>
 					</div>
 					
 					<div class="col-md-4" style="text-align: right;" >

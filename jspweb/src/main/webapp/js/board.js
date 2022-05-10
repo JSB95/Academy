@@ -91,26 +91,29 @@ function replydelete( rno ){
 	});
 }
 
-function replyupdateview(rno){
-	alert(rno);
+function replyupdateview(rno, bno){
+	
 	$("#"+rno).html(
 			
 				'<div class="col-md-10">'+
-					'<textarea id="rcontent" class="form-control" rows=1></textarea>'+
+					'<textarea id="rcontent_update" class="form-control" rows=1></textarea>'+
 				'</div>'+
 				'<div class="col-md-2">'+
-					'<button class="form-control py-4 my-1" onclick="replyupdate(<%=reply.getRno()%>)">수정</button>'+
+					'<button class="form-control py-4 my-1" onclick="replyupdate('+ rno + ',' + bno + ')">수정</button>'+
 				'</div>'
 	);
 }
 
-function replyupdate(rno){
+function replyupdate(rno, bno){
 	
 	alert(rno);
+	let rcontent_update=$("#rcontent_update").val();
+	
+	
 	
  	$.ajax({
 		url: "replyupdate",
-		data: {"rno" : rno},
+		data: {"bno": bno, "rno" : rno, "rcontent_update" : rcontent_update},
 		success: function(result){
 			if (result == 1){
 				alert("댓글수정완료");

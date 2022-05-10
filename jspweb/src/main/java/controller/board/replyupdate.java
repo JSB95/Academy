@@ -31,23 +31,15 @@ public class replyupdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("서블릿통신");
 		String bno = request.getParameter("bno");
-		int rno = Integer.parseInt(request.getParameter("rno"));
+		String rcontent = request.getParameter("rcontent_update");
 		String mid = (String)request.getSession().getAttribute("login");
 		int mno = MemberDao.getmemberDao().getmno(mid);
-		String rcontent = request.getParameter("rcontent");
+		System.out.println(bno +" + "+ rcontent +" + "+ mid + " + " + mno);
 		
-		Reply reply = new Reply(0, rcontent, null, 0, 0, mno, null);
 		
+		Reply reply = new Reply(0, rcontent, null, 0, Integer.parseInt(bno), mno, null);
+		System.out.println(reply.toString());
 		boolean result = BoardDao.getboardDao().replyupdate(reply);
 		
 		if (result) {
@@ -55,6 +47,14 @@ public class replyupdate extends HttpServlet {
 		} else {
 			response.getWriter().print(2);
 		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
