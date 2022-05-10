@@ -92,17 +92,15 @@ function replydelete( rno ){
 }
 
 function replyupdateview(rno){
+	alert(rno);
 	$("#"+rno).html(
-		'<form action="../board/replyupdate" method="post" enctype="multipart/form-data">' +
-			'<div class="row">' +
+			
 				'<div class="col-md-10">'+
 					'<textarea id="rcontent" class="form-control" rows=1></textarea>'+
 				'</div>'+
 				'<div class="col-md-2">'+
 					'<button class="form-control py-4 my-1" onclick="replyupdate(<%=reply.getRno()%>)">수정</button>'+
-				'</div>'+
-			'</div>' +
-		'</form>'
+				'</div>'
 	);
 }
 
@@ -110,7 +108,7 @@ function replyupdate(rno){
 	
 	alert(rno);
 	
- 	/*$.ajax({
+ 	$.ajax({
 		url: "replyupdate",
 		data: {"rno" : rno},
 		success: function(result){
@@ -122,5 +120,5 @@ function replyupdate(rno){
 				alert("댓글작성실패");
 			}
 		}
-	}); */
+	}); 
 }

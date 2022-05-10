@@ -40,8 +40,8 @@ public class replyupdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("서블릿통신");
-		//String bno = request.getParameter("bno");
-		//int rno = Integer.parseInt(request.getParameter("rno"));
+		String bno = request.getParameter("bno");
+		int rno = Integer.parseInt(request.getParameter("rno"));
 		String mid = (String)request.getSession().getAttribute("login");
 		int mno = MemberDao.getmemberDao().getmno(mid);
 		String rcontent = request.getParameter("rcontent");
