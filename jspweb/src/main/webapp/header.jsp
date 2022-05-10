@@ -7,7 +7,7 @@
 <title>ezen 쇼핑몰</title>
 	
 	<!-- 부트스트랩 css cdn -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
 	<!-- 사용자 정의 CSS -->
 	<link href="/jspweb/css/main.css" rel = "stylesheet">
 

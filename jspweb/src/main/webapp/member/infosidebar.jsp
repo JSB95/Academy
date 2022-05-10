@@ -10,7 +10,7 @@
 <body>
 	
 
-
+	
 	<ul>
 	
 		<li><a href="myshopping.jsp"> 주문 현황</a></li>

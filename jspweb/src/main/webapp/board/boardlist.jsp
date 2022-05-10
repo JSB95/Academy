@@ -38,13 +38,10 @@
 				Date date = new Date();
 				
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 				String date1 = simpleDateFormat.format(date);
-
 				
 				for (Board board : boardlist) {
 					String date2 = simpleDateFormat.format(simpleDateFormat.parse(board.getBdate()));
-
 					String date3 = "";
 					if (date1.equals(date2)){
 						date3 = board.getBdate().split(" ")[1];

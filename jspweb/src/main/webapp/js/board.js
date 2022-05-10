@@ -21,3 +21,52 @@ function filedelete(bno){
 		}
 	});
 }
+
+function replywrite(bno){
+	let rcontent = $("#rcontent").val();
+	
+	$.ajax({
+		url: "replywrite",
+		data: {"bno" : bno, "rcontent" : rcontent},
+		success: function(result){
+			if (result == 1){
+				alert("댓글작성완료");
+				$("#rcontent").val("");
+				$("#replytable").load(location.href + " #replytable");
+			} else {
+				alert("댓글작성실패");
+			}
+		}
+	});
+}
+
+function rereplyview(rno, bno){
+	$("#"+rno).html(
+		'<div class="row">' + 
+			'<div class="col-md-10">' +
+				'<textarea id="rrcontent" class="form-control" rows=3></textarea>' +
+			'</div>'+ 
+			'<div class="col-md-2">' +
+				'<button class="form-control py-4 my-1" onclick="rereplywrite(' + rno + ',' + bno + ')">대댓글등록</button>' +
+			'</div>' +
+		'</div>'
+		
+	);
+}
+
+function rereplywrite(rno, bno){
+	let rrcontent = $("#rrcontent").val();
+	$.ajax({
+		url: "rereplywrite",
+		data: {"rno" : rno, "bno" : bno, "rrcontent" : rrcontent},
+		success: function(result){
+			if (result == 1){
+				alert("대댓글 작성 완료");
+				$("#rrcontent").val("");
+				$("#replytable").load( location.href+" #replytable");
+			} else {
+				alert("대댓글 작성 실패");
+			}
+		}
+	});
+}
