@@ -1,4 +1,4 @@
-package controller.board;
+package controller.chatting;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.BoardDao;
-import dao.MemberDao;
-import dto.Reply;
+import dao.ChattingDao;
+import dto.Chatting;
 
 /**
- * Servlet implementation class replyupdate
+ * Servlet implementation class cwrite
  */
-@WebServlet("/board/replyupdate")
-public class replyupdate extends HttpServlet {
+@WebServlet("/cwrite")
+public class cwrite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public replyupdate() {
+    public cwrite() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +30,20 @@ public class replyupdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String bno = request.getParameter("bno");
-		String rcontent = request.getParameter("rcontent_update");
-		String mid = (String)request.getSession().getAttribute("login");
-		int mno = MemberDao.getmemberDao().getmno(mid);
-		String rno = request.getParameter("rno");
+		request.setCharacterEncoding("UTF-8");
+		String cname = request.getParameter("cname");
+		String ccontent = request.getParameter("ccontent");
+		Chatting chatting = new Chatting(0, cname, ccontent);
 		
-		
-		
-		Reply reply = new Reply(Integer.parseInt(rno), rcontent, null, 0, Integer.parseInt(bno), mno, null);
-		System.out.println(reply.toString());
-		boolean result = BoardDao.getboardDao().replyupdate(reply);
+		boolean result = ChattingDao.getChattingDao().cwrite(chatting);
 		
 		if (result) {
 			response.getWriter().print(1);
 		} else {
 			response.getWriter().print(2);
 		}
+		
+		
 	}
 
 	/**
@@ -55,7 +51,7 @@ public class replyupdate extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		doGet(request, response);
 	}
 
 }

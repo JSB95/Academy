@@ -36,10 +36,18 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	// 2. 모든 게시물 출력 메소드 [ 인수 : x  // 추후기능 = 검색 : 조건 ]
-	public ArrayList<Board> getboardlist() {
+	public ArrayList<Board> getboardlist(int startrow, int listsize, String key, String keyword) {
 		
 		ArrayList<Board> boardlist = new ArrayList<>();
-		String sql = "SELECT * FROM board WHERE mno ORDER BY bno DESC ";
+		
+		String sql = null;
+		
+		if (key.equals("") && keyword.equals("")) {
+			sql = "SELECT * FROM board ORDER BY bno DESC LIMIT " + startrow + "," + listsize;
+		} else {
+			sql = "SELECT * FROM board WHERE " + key + " LIKE '%" + keyword + "%' ORDER BY bno DESC LIMIT " + startrow + "," + listsize;
+		}
+		
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -69,6 +77,29 @@ public class BoardDao extends Dao{
 			System.err.println("getboardlist2 error : " + e);
 		}
 		return null;
+	}
+	
+	public int gettotalrow(String key, String keyword) {
+
+		String sql = null;
+		
+		if (key.equals("") && keyword.equals("")) {
+			sql = "SELECT COUNT(*) FROM board";
+		} else {
+			sql = "SELECCT COUNT(*) FROM board WHERE " + key + " LIKE '%" + keyword + "%'";
+		}
+		
+		
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.err.println("gettotalrow error : " + e);
+		}
+		return 0;
 	}
 	// 3. 개별 게시물 출력 메소드 [ 인수 : 게시물번호 ]
 	public Board getboard(int bno) {
@@ -181,7 +212,7 @@ public class BoardDao extends Dao{
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, reply.getRcontent());
-			ps.setInt(2, reply.getBno());
+			ps.setInt(2, reply.getRno());
 			ps.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -216,14 +247,11 @@ public class BoardDao extends Dao{
 	public int getreplylist(int bno) {
 		String sql = "SELECT COUNT(*) FROM reply WHERE bno =" + bno;
 		try {
-			
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				System.out.println(rs.getInt(1));
 				return rs.getInt(1);
 			}
-			
 		} catch (Exception e) {
 			System.err.println("getreplylist error : " + e);
 		}

@@ -106,14 +106,14 @@ function replyupdateview(rno, bno){
 
 function replyupdate(rno, bno){
 	
-	alert(rno);
+	
 	let rcontent_update=$("#rcontent_update").val();
 	
 	
 	
  	$.ajax({
 		url: "replyupdate",
-		data: {"bno": bno, "rno" : rno, "rcontent_update" : rcontent_update},
+		data: {"rno" : rno, "bno": bno, "rcontent_update" : rcontent_update},
 		success: function(result){
 			if (result == 1){
 				alert("댓글수정완료");
