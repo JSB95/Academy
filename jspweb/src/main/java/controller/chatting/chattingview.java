@@ -39,7 +39,7 @@ public class chattingview extends HttpServlet {
 		for (int i = 0; i < chattinglist.size(); i++) {
 			
 				response.getWriter().print(chattinglist.get(i).getCname() + "," + chattinglist.get(i).getCcontent() + "_");
-				System.out.print(chattinglist.get(i).getCname() + "," + chattinglist.get(i).getCcontent() + "_");
+				
 			
 		}
 		
