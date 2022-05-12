@@ -42,9 +42,13 @@
 							<li> <span class="header_topmenu"> <%=loginid %>님 &nbsp; </span> </li>
 							<li> <a href = "/jspweb/logout" class="header_topmenu"> 로그아웃 </a> · </li>
 							<li> <a href = "/jspweb/member/myshopping.jsp" class="header_topmenu"> 나의쇼핑 </a> · </li>
-						<% } %>	
+							<% if(loginid.equals("admin")) { %>
+								<li> <a href = "/jspweb/admin/dashboard.jsp" class="header_topmenu"> 관리자 </a> · </li>
+							<% } %>	
 							<li> <a href="/jspweb/board/boardlist.jsp?key=&keyword=" class="header_topmenu">자유게시판</a>  </li>
 							<li> <a href="/jspweb/teamchatting.jsp" class="header_topmenu">실시간 채팅</a></li>
+						<% } %>
+						
 						
 					</ul>
 					
