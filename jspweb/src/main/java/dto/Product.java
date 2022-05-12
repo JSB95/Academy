@@ -5,6 +5,7 @@ public class Product {
 	private String pname;
 	private int pprice;
 	private float pdiscount;
+	private int pactive;
 	private String pimg;
 	private int cno;
 	
@@ -12,15 +13,20 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(int pno, String pname, int pprice, float pdiscount, String pimg, int cno) {
+	
+
+	public Product(int pno, String pname, int pprice, float pdiscount, int pactive, String pimg, int cno) {
 		super();
 		this.pno = pno;
 		this.pname = pname;
 		this.pprice = pprice;
 		this.pdiscount = pdiscount;
+		this.pactive = pactive;
 		this.pimg = pimg;
 		this.cno = cno;
 	}
+
+
 
 	public int getPno() {
 		return pno;
@@ -69,6 +75,30 @@ public class Product {
 	public void setCno(int cno) {
 		this.cno = cno;
 	}
+
+
+
+	public int getPactive() {
+		return pactive;
+	}
+
+
+
+	public void setPactive(int pactive) {
+		this.pactive = pactive;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Product [pno=" + pno + ", pname=" + pname + ", pprice=" + pprice + ", pdiscount=" + pdiscount
+				+ ", pactive=" + pactive + ", pimg=" + pimg + ", cno=" + cno + "]";
+	}
+	
+	
+	
+	
 	
 	
 }
