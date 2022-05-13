@@ -76,7 +76,7 @@ public class ProductDao extends Dao {
 	public ArrayList<Product> getproductlist (){
 		ArrayList<Product> getproudctlist = new ArrayList<Product>();
 		
-		String sql = "SELECT * FROM product ORDER BY pno";
+		String sql = "SELECT * FROM product O ";
 		
 		try {
 			ps = con.prepareStatement(sql);

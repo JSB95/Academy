@@ -48,7 +48,7 @@
 							<li> <a href="/jspweb/board/boardlist.jsp?key=&keyword=" class="header_topmenu">자유게시판</a>  </li>
 							<li> <a href="/jspweb/teamchatting.jsp" class="header_topmenu">실시간 채팅</a></li>
 						<% } %>
-						
+						<li> <a href="/jspweb/bluemarble.jsp" class="header_topmenu">bluemarble</a></li>
 						
 					</ul>
 					

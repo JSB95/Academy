@@ -1,7 +1,13 @@
 function categorybtn(){
 	$("#categoryinput").html(
-		'<input type="text" id="cname">' +
-		'<button onclick="categoryadd()" type="button">등록</button>'
+		'<div class="row">' +
+			'<div class="col-md-5">' +
+			'</div>' +
+				'<input class="form-control" type="text" id="cname">' +
+				'<button class="form-control" onclick="categoryadd()" type="button">등록</button>' +
+			'<div class="col-md-5">' +
+			'</div>' +
+		'</div>'
 	)
 }
 
@@ -54,3 +60,13 @@ function productadd(){
 		}
 	});
 }
+
+
+
+$("#pimg").change(function (e){
+	let reader = new FileReader();
+	reader.readAsDataURL(e.target.files[0]);
+	reader.onload = function (e){
+		$("#preview").attr("src",e.target.result);
+	}
+});
