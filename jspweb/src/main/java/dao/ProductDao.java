@@ -107,5 +107,21 @@ public class ProductDao extends Dao {
 		
 		return 0;
 	}
+	
+	public Product getproduct() {
+		return null;
+	}
+	
+	public boolean activechange(int pno, int active) {
+		String sql = "UPDATE product set pactive =" + active + " WHERE pno=" + pno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("activechange error : " + e);
+		}
+		return false;
+	}
 
 }

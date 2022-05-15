@@ -63,7 +63,7 @@
 			<th> 
 				<button onclick="#" class="">제품 삭제</button> 
 				<button onclick="#" class="">제품 수정</button> 
-				<button onclick="#" class="">상태 변경</button> 
+				<button onclick="pnomove(<%=product.getPno() %>)" data-bs-toggle="modal" data-bs-target="#activemodal" class="">상태 변경</button> 
 				<button onclick="#" class="">재고 변경</button> 
 			</th>
 		
@@ -73,6 +73,41 @@
 	
 	</table>
 	
+	<div class="modal" tabindex="-1" id="activemodal">
+		<div class="modal-dialog">
+		
+			<div class="modal-content">
+			
+				<div class="modal-header">
+				
+					<h5 class="modal-title">제품 상태 변경</h5>
+					
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					
+				</div>
+				
+				<div class="modal-body">
+				
+					<p>변경할 상태를 선택해주세요. </p>
+					
+					<input type="hidden" id="modalinput">
+					
+				</div>
+				
+				<div class="modal-footer">
+				
+					<button type="button" class="btn btn-primary" onclick="activechange(0)">준비</button>
+		      		<button type="button" class="btn btn-primary" onclick="activechange(1)">판매</button>
+		      		<button type="button" class="btn btn-primary" onclick="activechange(2)">품절</button>
+		      		<button type="button" class="btn btn-primary" onclick="activechange(3)">중단</button>
+		        	<button id="modalclosebtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        	
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="/jspweb/js/productlist.js" type="text/javascript"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/jspweb/js/productadd.js" type="text/javascript"></script>
 
