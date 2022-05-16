@@ -1,3 +1,4 @@
+<%@page import="dto.Stock"%>
 <%@page import="dao.CategoryDao"%>
 <%@page import="dao.ProductDao"%>
 <%@page import="dto.Product"%>
@@ -48,7 +49,7 @@
 		
 		<tr>
 		
-			<th> <%=product.getPno() %> </th>
+			<th id="th<%=product.getPno()%>"> <%=product.getPno() %> </th>
 			<th> <img width="100%" src="/jspweb/admin/productimg/<%=product.getPimg()%>"> </th>
 			<th> <%=product.getPname() %> </th>
 			<th> <%=product.getPprice()%> </th>
@@ -56,15 +57,70 @@
 			<th> <%=price %> </th>
 			<th> <%=product.getPactive() %> </th>
 			<th> <%=cname %> </th>
-			<th> 색상 </th>
-			<th> 사이즈 </th>
-			<th> 재고수량 </th>
-			<th> 수정일 </th>
+			
+			
+			<th> 
+				<select>
+			
+					<% 
+						ArrayList<Stock> stocklist = ProductDao.getProductDao().getStock(product.getPno());
+						for (Stock stock : stocklist){
+					%>
+					
+						<option><%=stock.getScolor() %></option>
+					<%
+						}
+					%>
+								
+				 </select> 
+			</th>
+			
+			<th>
+				<select>
+				
+					<% 
+						for (Stock stock : stocklist){
+					%>
+					
+						<option><%=stock.getSsize()%></option>
+					<%
+						}
+					%>
+					
+				</select> 
+			</th>
+			
+			<th> 
+				<% if (!stocklist.isEmpty() ) { %>
+					<% if (stocklist.get(0).getSamount() == 0) { %>
+					<span id="amountbox<%=product.getPno()%>">해당 사이즈 색상 <br> 재고없음</span>
+					<% } else { %>
+					<span id="amountbox<%=product.getPno()%>"> <%=stocklist.get(0).getSamount() %> </span> 
+					<% } %>
+				<% } else { %>
+					<span id="amountbox<%=product.getPno()%>">재고 없음</span>
+				<% } %>
+			</th>
+			
+			<th>
+			
+				<% if (!stocklist.isEmpty()) { %>
+					<% if (stocklist.get(0).getSamount() == 0) { %>
+						<span id="databox<%=product.getPno()%>"> - </span>
+					<% } else { %>
+						<span id="databox<%=product.getPno()%>"> <%=stocklist.get(0).getUpdatedate() %></span>
+			 		<% } %>	
+		 		<% } else { %>
+			 			<span id="databox<%=product.getPno()%>"> - </span>
+				<% } %>
+			</th>
+			
+			
 			<th> 
 				<button onclick="#" class="">제품 삭제</button> 
 				<button onclick="#" class="">제품 수정</button> 
-				<button onclick="pnomove(<%=product.getPno() %>)" data-bs-toggle="modal" data-bs-target="#activemodal" class="">상태 변경</button> 
-				<button onclick="#" class="">재고 변경</button> 
+				<button onclick="pnomove(<%=product.getPno()%>)" data-bs-toggle="modal" data-bs-target="#activemodal">상태 변경</button> 
+				<button onclick="getstock(<%=product.getPno()%>)" data-bs-toggle="modal" data-bs-target="#stockmodal">재고 변경</button> 
 			</th>
 		
 		</tr>
@@ -107,8 +163,49 @@
 		</div>
 	</div>
 	
-	<script src="/jspweb/js/productlist.js" type="text/javascript"></script>
+	<div class="modal" tabindex="-1" id="stockmodal">
+	
+	  <div class="modal-dialog">
+	  
+	    <div class="modal-content">
+	    
+	      <div class="modal-header"> 
+	      
+	        <h5 class="modal-title"> 제품 재고 변경 </h5>
+	        
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        
+	      </div>
+	      
+	      <div class="modal-body">
+
+	      	<table id="stocklistbox">
+
+	      	</table>
+	      	
+	      	<div id="updatebox" style="display: none;">
+	      	
+	      		재고번호 : <span id="sno"> </span><br>
+	      		재고수량 : <input type="text" id="samount">
+	      		
+	      	</div>
+	      	
+	      </div>
+	      
+	      <div class="modal-footer"> 
+	      
+	      		<button type="button" class="btn btn-primary" onclick="stockupdate()"> 수정 처리</button>
+	        	<button id="modalclosebtn2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        	
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+	<script src="/jspweb/js/productlist.js" type="text/javascript"></script>
+	
 	<script src="/jspweb/js/productadd.js" type="text/javascript"></script>
 
 </body>

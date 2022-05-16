@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dto.Category;
 import dto.Product;
+import dto.Stock;
 
 public class ProductDao extends Dao {
 	
@@ -76,7 +77,7 @@ public class ProductDao extends Dao {
 	public ArrayList<Product> getproductlist (){
 		ArrayList<Product> getproudctlist = new ArrayList<Product>();
 		
-		String sql = "SELECT * FROM product O ";
+		String sql = "SELECT * FROM product";
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -122,6 +123,53 @@ public class ProductDao extends Dao {
 			System.err.println("activechange error : " + e);
 		}
 		return false;
+	}
+	
+	public boolean ssave(Stock stock) {
+		String sql = "INSERT INTO stock(scolor, ssize, samount, pno) VALUES (?, ?, ?, ?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, stock.getScolor());
+			ps.setString(2, stock.getSsize());
+			ps.setInt(3, stock.getSamount());
+			ps.setInt(4, stock.getPno());
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("ssave error: " + e);
+		}
+		return false;
+	}
+	
+	public ArrayList<Stock> getStock(int pno){
+		ArrayList<Stock> list = new ArrayList<Stock>();
+		String sql = "SELECT * FROM stock WHERE pno=" + pno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Stock stock = new Stock(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+				list.add(stock);
+			}
+			return list;
+		} catch (Exception e) {
+			System.err.println("getstock error : " + e);
+		}
+		
+		return null;
+	}
+	
+	public boolean stockupdate( int sno , int samount ) {
+		String sql = "UPDATE stock SET samount = "+ samount +" WHERE sno=" + sno;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate(); 
+			return true;
+		}catch (Exception e) { 
+			System.err.println("stockupdate error : " + e); 
+		} 
+		return false;
+
 	}
 
 }

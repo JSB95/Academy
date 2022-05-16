@@ -1,9 +1,6 @@
 package controller.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductDao;
-import dto.Category;
+import dto.Stock;
 
 /**
- * Servlet implementation class getcategory
+ * Servlet implementation class stockadd
  */
-@WebServlet("/admin/getcategory")
-public class getcategory extends HttpServlet {
+@WebServlet("/admin/stockadd")
+public class stockadd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getcategory() {
+    public stockadd() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +30,21 @@ public class getcategory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setCharacterEncoding("UTF-8");
-		ArrayList<Category> arrayList = ProductDao.getProductDao().getcategorylist();
-		PrintWriter out = response.getWriter();
-		String html = "";
-		String type = request.getParameter("type");
+		request.setCharacterEncoding("UTF-8");
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		String scolor = request.getParameter("scolor");
+		String sszie = request.getParameter("ssize");
+		int samount = Integer.parseInt(request.getParameter("samount"));
 		
-		if (type != null && type.equals("option")) {
-			for (Category temp : arrayList) {
-				html += "<option value=\"" + temp.getCno() + "\">" + temp.getCname() + "</option>";
-			}
+		Stock stock = new Stock(0, scolor, sszie, samount, null, null, pno);
+		
+		boolean result = ProductDao.getProductDao().ssave(stock);
+		
+		if (result) {
+			response.getWriter().print(1);
 		} else {
-			int i = 1;
-			for (Category temp : arrayList) {
-				html += "<input type=\"radio\" name=\"cno\" value=\""+temp.getCno()+"\">"+temp.getCname();
-				if( i % 6 == 0 ) html += "<br>"; // 만약에 카테고리가 개수 6배수마다 줄바꿈처리 
-
-				i++;
-			}
+			response.getWriter().print(2);
 		}
-		
-		
-		out.print(html);
-		
 	}
 
 	/**

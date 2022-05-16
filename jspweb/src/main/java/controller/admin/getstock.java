@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductDao;
-import dto.Category;
+import dto.Stock;
 
 /**
- * Servlet implementation class getcategory
+ * Servlet implementation class getstock
  */
-@WebServlet("/admin/getcategory")
-public class getcategory extends HttpServlet {
+@WebServlet("/admin/getstock")
+public class getstock extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getcategory() {
+    public getstock() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +34,37 @@ public class getcategory extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
-		ArrayList<Category> arrayList = ProductDao.getProductDao().getcategorylist();
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		String field = request.getParameter("field");
 		PrintWriter out = response.getWriter();
 		String html = "";
-		String type = request.getParameter("type");
+		ArrayList<Stock> list = ProductDao.getProductDao().getStock(pno);
 		
-		if (type != null && type.equals("option")) {
-			for (Category temp : arrayList) {
-				html += "<option value=\"" + temp.getCno() + "\">" + temp.getCname() + "</option>";
+		if (field != null && field.equals("amount")) {
+			String scolor = request.getParameter("scolor");
+			String ssize = request.getParameter("ssize");
+			
+			for (Stock temp : list) {
+				if (temp.getScolor().equals(scolor) && temp.getSsize().equals(ssize)) {
+					out.print(temp.getSamount() + "," + temp.getUpdatedate());
+				}
 			}
 		} else {
-			int i = 1;
-			for (Category temp : arrayList) {
-				html += "<input type=\"radio\" name=\"cno\" value=\""+temp.getCno()+"\">"+temp.getCname();
-				if( i % 6 == 0 ) html += "<br>"; // 만약에 카테고리가 개수 6배수마다 줄바꿈처리 
-
-				i++;
+		
+			for (Stock temp : list) {
+				html +=
+						"<tr>" +
+							"<td> " + temp.getScolor() + " <td>" +
+							"<td> " + temp.getSsize() + " <td>" +
+							"<td> " + temp.getSamount() + " <td>" +
+							"<td>"
+							+ "<button onclick=\'showupdate("+temp.getSno()+")\'>수정</button>"
+							+ "<button>삭제</button>"
+							+ "</td>" +
+						"</tr>";
 			}
+			out.print(html);
 		}
-		
-		
-		out.print(html);
-		
 	}
 
 	/**
