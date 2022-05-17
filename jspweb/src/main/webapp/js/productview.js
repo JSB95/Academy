@@ -80,7 +80,7 @@ function choicelist(){
 	for (let i = 0; i < list.length; i++){
 		html += 
 			'<tr>'+
-				'<td> <span>'+list[i].pname+'</span> <br>  <span class="pointbox">- '+list[i].color+'/'+list[i].size+'</span>'+
+				'<td> <span>'+list[i].pname+'</span> <span class="pointbox">- '+list[i].color+'/'+list[i].size+'</span>'+
 				'</td>'+
 				'<td> <div class="row g-0">'+
 						'<div class="col-md-7">'+
