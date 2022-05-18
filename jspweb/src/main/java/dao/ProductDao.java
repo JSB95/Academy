@@ -182,5 +182,44 @@ public class ProductDao extends Dao {
 		return false;
 
 	}
+	
+	public int saveplike(int pno, int mno) {
+		try {
+			String sql = "SELECT plikeno FROM plike WHERE pno=" + pno + " AND mno=" + mno;
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				sql = "DELETE FROM plike WHERE plikeno = " + rs.getInt(1);
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+				return 2;
+			} else {
+				sql = "INSERT INTO plike(pno, mno) VALUES(" + pno + "," + mno + ")";
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+				return 1;
+			}
+		} catch (Exception e) {
+			System.err.println("saveplike error : " + e);
+		} 
+		
+		
+		return 0;
+	}
+	
+	public boolean getplike(int pno, int mno) {
+		String sql = "SELECT * FROM plike WHERE pno=" + pno + " AND mno=" + mno;
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			System.err.println("getplike error : " + e);
+		}
+		
+		return false;
+	}
 
 }

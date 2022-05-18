@@ -56,9 +56,11 @@ $("#size_select").change(function(){
 		size : size,
 		amount : amount,
 		pprice : pprice,
+		totalprice : (pprice * amount),
+		point : (pprice * amount) * 0.01,
 		chk : chk
 	}
-	console.log(chk);
+	console.log("amount : " + list.amount);
 	for (let i = 0; i < list.length; i++){
 		if (list[i].chk == chk){
 			alert("이미 선택한 옵션입니다.");
@@ -78,6 +80,8 @@ function choicelist(){
 	let html = '<tr> <th width="60%"> 상품명 </th> <th width="25%"> 상품수 </th><th width="15%"> 가격 </th></tr>';
 	
 	for (let i = 0; i < list.length; i++){
+		list[i].totalprice = list[i].pprice * list[i].amount;
+		list[i].point = list[i].totalprice *  0.01;
 		html += 
 			'<tr>'+
 				'<td> <span>'+list[i].pname+'</span> <span class="pointbox">- '+list[i].color+'/'+list[i].size+'</span>'+
@@ -95,8 +99,8 @@ function choicelist(){
 					'</div>'+
 				'</td>'+
 				'<td>'+
-					'<span class="pricebox">'+(list[i].amount * list[i].pprice).toLocaleString('ko-KR')+'원</span> <br>' +
-					'<span class="pointbox">(적)'+((list[i].amount * list[i].pprice)*0.01).toLocaleString('ko-KR')+'원</span>'+
+					'<span class="pricebox">'+(list[i].amount * list[i].pprice).toLocaleString('ko-KR',{maximumFractionDigits : 0})+'원</span> <br>' +
+					'<span class="pointbox">(적)'+((list[i].amount * list[i].pprice)*0.01).toLocaleString('ko-KR',{maximumFractionDigits : 0})+'원</span>'+
 				'</td>'+
 			'</tr>'
 	}
@@ -110,7 +114,7 @@ function choicelist(){
 		total_amount += list[i].amount * 1;
 	}
 	
-	$("#total_price").html(total_price.toLocaleString('ko-KR') + '원 (' + total_amount + '개)');
+	$("#total_price").html(total_price.toLocaleString('ko-KR',{maximumFractionDigits : 0}) + '원 (' + total_amount + '개)');
 
 		
 }
@@ -150,3 +154,49 @@ function amountdecre(i){
 	list[i].amount--;
 	choicelist();
 }
+
+function saveplike(mno){
+	let pno = $("#pno").val();
+	if (mno == null){
+		alert("로그인이 필요합니다.");
+		return;
+	}
+	console.log(mno);
+	
+	$.ajax({
+		url : "saveplike",
+		data : {"mno" : mno, "pno" : pno},
+		success : function (re){
+			console.log("saveplike 통신");
+			if (re == 1){
+				alert("관심상품 등록 완료");
+			} else if (re == 2){
+				alert("관심상품 취소 완료");
+			} else {
+				console.log("오류");
+			}
+			$("#btnbox").load(location.href + " #btnbox")
+		}
+	});
+}
+
+function savecart(mno){
+	if (mno == 0){
+		alert("로그인이 필요합니다.");
+		return;
+	}
+	console.log(list.length);
+	
+	if(list.length == 0){
+		alert("선택된 옵션이 없습니다.");
+	}
+	
+	$.ajax({
+		url : 'savecart',
+		data : {'json' : JSON.stringify(list)},
+		success : function(re){
+			console.log("서블릿 통신");
+		}
+	})
+}
+

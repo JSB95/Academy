@@ -1,3 +1,4 @@
+<%@page import="dao.MemberDao"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.TreeSet"%>
 <%@page import="dto.Stock"%>
@@ -142,15 +143,29 @@
 					<div class="row my-4">
 					
 						<div class="col-md-6"> 총 상품금액  </div>
-						<div id = "total_price" class="col-md-6 total_price" > </div>
+						<div id = "total_price" class="col-md-6 total_price" > </div> 
 						
 					</div>
 					
-					<div class="row my-4">
+					<div id="btnbox" class="btnbox">
+						<%
+							String mid = (String)session.getAttribute("login");
+							int mno = MemberDao.getmemberDao().getmno(mid);
+						%>
 					
-						<div class="col-md-4"><button class="form-control p-4" style="background-color: black; color: white;">바로 구매하기</button></div>
-						<div class="col-md-4"><button class="form-control p-4">장바구니 담기</button></div>
-						<div class="col-md-4"><button class="form-control p-4">관심상품 등록</button></div>
+						<button id="btn1">바로 구매하기</button>
+						<button id="btn2" onclick="savecart(<%=mno%>)">장바구니 담기</button>
+						<%
+							if (mid != null && ProductDao.getProductDao().getplike(pno, mno)){
+						%>
+								<button id="btn3" onclick="saveplike(<%=MemberDao.getmemberDao().getmno(mid)%>)">♥</button>
+								
+						<%	} else {%> 
+								
+								<button id="btn3" onclick="saveplike(<%=MemberDao.getmemberDao().getmno(mid)%>)">♡</button>
+						
+						<% } %>
+					
 						
 					</div>
 				</div>
