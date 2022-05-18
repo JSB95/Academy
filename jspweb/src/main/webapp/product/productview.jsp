@@ -73,7 +73,15 @@
 					</div>
 					
 					<input type="hidden" value="<%=pno%>" id="pno">
-					<input type="hidden" value="<%=p.getPprice()%>" id="pprice">
+					<% if (p.getPdiscount() == 0) { %>
+					
+						<input type="hidden" value="<%=p.getPprice()%>" id="pprice">
+					
+					<% } else {%> 
+					
+						<input type="hidden" value="<%=p.getPprice() * p.getPdiscount()%>" id="pprice">
+					
+					<% } %>
 					
 					<input type="hidden" value="<%=pno%>" id="<%=pno%>">
 					
@@ -134,7 +142,7 @@
 					<div class="row my-4">
 					
 						<div class="col-md-6"> 총 상품금액  </div>
-						<div class="col-md-6 total_price" > 54,900원(1개)  </div>
+						<div id = "total_price" class="col-md-6 total_price" > </div>
 						
 					</div>
 					
