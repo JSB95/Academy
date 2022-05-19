@@ -84,7 +84,7 @@
 				<li class="nav-item"> <a href="#" style="color: #FF0000;"> 50% 할인  </a> </li>
 				
 				<li class="nav-item"> <input type="text" class="header_input" size="13">&nbsp;<button><i class="fas fa-search"> </i></button> </li>
-				<li class="nav-item"> <a href="#"> <i class="fa-solid fa-cart-shopping"></i></a> </li>
+				<li class="nav-item"> <a href="/jspweb/product/productcart.jsp"> <i class="fa-solid fa-cart-shopping"></i></a> </li>
 			
 			</ul>
 		

@@ -1,6 +1,8 @@
 package controller.product;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.*;
+
+import dao.CartDao;
+import dao.MemberDao;
+import dao.ProductDao;
+import dto.Cart;
+import dto.Stock;
 
 /**
  * Servlet implementation class savecart
@@ -30,26 +38,47 @@ public class savecart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		System.out.println(request.getParameter("json"));
-		
 		String data = request.getParameter("json");
+		
+		int pno = Integer.parseInt(request.getParameter("pno"));
 		
 		
 		
 		try {
 			
 			JSONArray jsonArray = new org.json.JSONArray(data);
+			int error = -1;
+			int i = 0;
 			
-			for (int i = 0; i < jsonArray.length(); i++) {
+			for (i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				System.out.println("pname : " + jsonObject.get("pname"));
-				System.out.println("color : " + jsonObject.get("color"));
-				System.out.println("size : " + jsonObject.get("size"));
-				System.out.println("amount : " + jsonObject.get("amount"));
-				System.out.println("pprice : " + jsonObject.get("pprice"));
-				System.out.println("chk : " + jsonObject.get("chk"));
-				System.out.println("total price : " + jsonObject.get("totalprice"));
-				System.out.println("point : " + jsonObject.get("point"));
+				
+				int amount = Integer.parseInt(jsonObject.getString("amount").toString());
+				int totalprice = Integer.parseInt(jsonObject.get("totalprice").toString());
+				int sno = 0;
+				ArrayList<Stock> list = ProductDao.getProductDao().getStock(pno);
+				for (Stock s : list) {
+					if (s.getSsize().equals(jsonObject.get("size").toString()) && s.getScolor().equals(jsonObject.get("color").toString())) {
+						sno = s.getSno();
+					}
+				}
+				
+				String mid = (String)request.getSession().getAttribute("login");
+				int mno = MemberDao.getmemberDao().getmno(mid);
+				
+				Cart cart = new Cart(0, amount, totalprice, sno, mno);
+				
+				boolean result = CartDao.getCartDao().savecart(cart);
+				System.out.println("json->dto : "+ cart.toString());
+				if (result == false) {
+					error = i;
+				} 
+			}
+			
+			if (error == -1) {
+				response.getWriter().print(-1);
+			} else {
+				response.getWriter().print(i);
 			}
 			
 			

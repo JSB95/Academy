@@ -10,12 +10,12 @@ $("#color_select").change(function(){
 		data : {"pno" : pno, "color" : color},
 		success : function(re){
 			let list = re.replace("{","");
-			console.log(list);
+			
 			list = list.replace("}","");
 			console.log(list);
 
 			
-			let itemlist = list.split(",");
+			let itemlist = list.split(", ");
 			let html = "";
 			html += "<option value=''>[필수] 옵션 선택 </option>";
 			
@@ -185,7 +185,7 @@ function savecart(mno){
 		alert("로그인이 필요합니다.");
 		return;
 	}
-	console.log(list.length);
+	console.log("savecart통신");
 	
 	if(list.length == 0){
 		alert("선택된 옵션이 없습니다.");
@@ -193,9 +193,13 @@ function savecart(mno){
 	
 	$.ajax({
 		url : 'savecart',
-		data : {'json' : JSON.stringify(list)},
+		data : {'json' : JSON.stringify(list), 'pno' : $("#pno").val()},
 		success : function(re){
-			console.log("서블릿 통신");
+			if (re == -1){
+				alert("장바구니에 추가되었습니다.");
+			} else {
+				alert("오류 : " + ((re*1)) + "번째 옵션");
+			}
 		}
 	})
 }
