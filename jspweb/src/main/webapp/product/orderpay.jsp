@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="/jspweb/css/productcart.css">
 </head>
 <body>
+
+	
 
 	<%@include file="../header.jsp" %>
 	
@@ -16,8 +17,8 @@
 		<div class="processbox">
 		
 			<span> 01 옵션선택 </span> <span> > </span>
-			<span id="process_active"> 02 장바구니 </span> <span> > </span>
-			<span> 03 주문결제 </span> <span> > </span>
+			<span> 02 장바구니 </span> <span> > </span>
+			<span id="process_active"> 03 주문결제 </span> <span> > </span>
 			<span> 04 주문완료 </span>
 		
 		</div>
@@ -35,7 +36,7 @@
 		<div class="paybox">
 		
 			<span>총 상품금액</span> <span id="sumprice"> 20,000원 </span> <span> + </span>
-			<span> 배송비 </span> <span id="deleverypay"> 배송 </span> <span> = </span>
+			<span> 배송비 </span> <span id="deleverypay"> 123 </span> <span> = </span>
 			<span> 총 주문금액 : </span> <span id="totalpay"> 22,500원 </span> 
 			
 			<div class="pointbox">
@@ -57,7 +58,7 @@
 			
 			<div class="col-sm-3">
 			
-				<a href="/jspweb/product/orderpay.jsp"> <button style="background-color: blue; color: white;" class="form-control py-4"> 구매하기 </button></a>
+				<button onclick="payment()" style="background-color: blue; color: white;" class="form-control py-4"> 결제하기 </button>
 				
 			</div>
 		
@@ -67,7 +68,10 @@
 	
 	<%@include file="../footer.jsp" %>
 	
-	<script type="text/javascript" src="/jspweb/js/productcart.js"></script>
+	<!-- iamport.payment.js -->
+  	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
+	<script type="text/javascript" src="/jspweb/js/orderpay.js"></script>
 
 </body>
 </html>

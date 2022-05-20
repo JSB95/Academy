@@ -68,5 +68,35 @@ public class CartDao extends Dao {
 		}
 		return null;
 	}
+	
+	public boolean updatecart(int cartno, int samount, int totalprice) {
+		
+		String sql = "UPDATE cart SET samount = " + samount +", totalprice = " + totalprice + " WHERE cartno = " + cartno;
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("updatecart error : " + e);
+		}
+		
+		return false;
+	}
+	
+	public boolean deletecart(int cartno) {
+		
+		String sql = "DELETE FROM cart WHERE cartno = " + cartno;
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.err.println("deletecart error : " + e);
+		}
+		
+		return false;
+	}
 
 }
