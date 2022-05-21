@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row text-center">
 	        <div class="col-md-offset-1 col-md-2" style="float: none; margin:0 auto;">
 	        	<span> news</span>
 	        </div>

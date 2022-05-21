@@ -17,7 +17,7 @@
 	
 		<div class="container">
 			<div class="py-3">
-				<div class="row">
+				<div class="row text-center">
 					<div class="col-md-4">
 						<a href="boardlist.jsp"><span>sidebar</span></a>
 					</div>
