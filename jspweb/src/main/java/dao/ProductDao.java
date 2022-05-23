@@ -1,8 +1,10 @@
 package dao;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import dto.Category;
+import dto.Order;
 import dto.Product;
 import dto.Stock;
 
@@ -217,6 +219,37 @@ public class ProductDao extends Dao {
 			}
 		} catch (Exception e) {
 			System.err.println("getplike error : " + e);
+		}
+		
+		return false;
+	}
+	
+	public boolean saveorder(Order order) {
+		String sql = "INSERT INTO porder(ordername, orderphone, orderaddress, ordertotalpay, orderrequest, mno) VALUES(?, ?, ?, ?, ?, ?)";
+		try {
+			ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, order.getOrdername());
+			ps.setString(2, order.getOrderphone());
+			ps.setString(3, order.getOrderaddress());
+			ps.setInt(4, order.getOrdertotalpay());
+			ps.setString(5, order.getOrderrequest());
+			ps.setInt(6, order.getMno());
+			ps.executeUpdate();
+			rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				int pk = rs.getInt(1);
+				System.out.println(pk);
+				sql = "INSERT INTO porderdetail(samount, totalprice, orderno, sno) " + "SELECT samount, totalprice, " + pk + ", sno FROM cart WHERE mno = " + order.getMno();
+				System.out.println(sql);
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+				sql = "DELETE FROM cart WHERE mno = " + order.getMno();
+				System.out.println(sql);
+				ps = con.prepareStatement(sql);
+				ps.executeUpdate();
+			}
+		} catch (Exception e) {
+			System.err.println("saveorder error : " + e);
 		}
 		
 		return false;

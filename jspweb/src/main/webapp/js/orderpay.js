@@ -59,15 +59,17 @@ function getcart(){
 
 function cartview(){
 	
+	sumprice = 0;
+	deliverypay = 0;
+	totalpay = 0;
+	
 		let tr= '<tr>' +
 			'<th width="60%">상품정보</th>' +
 			'<th width="20%">수량</th>' +
 			'<th width="20%">가격</th>' +	
 		'</tr>';
 		
-		sumprice = 0;
-		deliverypay = 0;
-		totalpay = 0;
+
 		for( let i = 0 ; i<jsonarray.length; i++ ){
 				
 				sumprice += jsonarray[i]["totalprice"]; // 누적합계
@@ -120,7 +122,7 @@ function cartview(){
 		$("#mpoint").html(member["mpoint"]);
 		$("#pointbox").html(mpoint);
 		$("#totalpay").html(totalpay);
-		$("sumprice").html(sumprice);
+		$("#sumprice").html(sumprice);
 		$("#deliverypay").html(deliverypay);
 }
 
@@ -162,11 +164,29 @@ function payment() {
 }
 
 function saveorder(){
-	alert("DB처리");
+	
+	let ordername = $("#ordername").val();
+	let orderphone = $("#orderphone").val();
+	let orderaddress = $("#maddress1").val() + "_" + $("#maddress2").val() + "_" + $("#maddress3").val() + "_" + $("#maddress4").val();
+	let ordertotalpay = totalpay;
+	let orderrequest = $("#orderrequest").val();
+	
+	let orderjson = {
+		ordername : ordername,
+		orderphone : orderphone,
+		orderaddress : orderaddress,
+		ordertotalpay : ordertotalpay,
+		orderrequest : orderrequest
+		
+	} 
+	
+	console.log(orderjson);
+			
 	$.ajax({
 		url : "saveorder",
-		success : function(re){
-			alert("DB처리 성공");
+		data : {'orderjson' : JSON.stringify(orderjson)},
+		success : function(re){			
+			alert("DB처리");
 		}
 	})
 }
@@ -225,7 +245,7 @@ function sample4_execDaumPostcode() {
 }
 
 function pointbtn(){
-	mpoint = $("#pointinput").val;
+	mpoint = $("#pointinput").val();
 	
 	if (mpoint == 0){
 		mpoint = 0;

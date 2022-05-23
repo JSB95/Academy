@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import dao.MemberDao;
+import dao.ProductDao;
+import dto.Order;
 
 /**
  * Servlet implementation class saveorder
@@ -31,6 +35,22 @@ public class saveorder extends HttpServlet {
 		// TODO Auto-generated method stub
 		String mid = (String)request.getSession().getAttribute("login");
 		int mno = MemberDao.getmemberDao().getmno(mid);
+		String json = request.getParameter("orderjson");
+		try {
+			JSONObject jo = new JSONObject(json);
+			String ordername = jo.getString("ordername");
+			String orderphone = jo.getString("orderphone");
+			String orderaddress = jo.getString("orderaddress");
+			int ordertotalpay = jo.getInt("ordertotalpay");
+			String orderrequest = jo.getString("orderrequest");
+			
+			Order order = new Order(0, null, ordername, orderphone, orderaddress, ordertotalpay, 0, orderrequest, 0, mno);
+			System.out.println(order);
+			
+			ProductDao.getProductDao().saveorder( order );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
