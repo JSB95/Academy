@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<link href="/jspweb/css/productcart.css" rel="stylesheet">
 </head>
 <body>
 
@@ -23,46 +25,100 @@
 		
 		</div>
 		
-		<table class="table my-5" id="carttable">
-
-		</table>
+		<div class="row">
 		
-		<div class="col-sm-2">
-			
-			<button class="form-control" onclick="cancel(-1)"> 상품 전체 삭제</button>
-			
-		</div>
-		
-		<div class="paybox">
-		
-			<span>총 상품금액</span> <span id="sumprice"> 20,000원 </span> <span> + </span>
-			<span> 배송비 </span> <span id="deleverypay"> 123 </span> <span> = </span>
-			<span> 총 주문금액 : </span> <span id="totalpay"> 22,500원 </span> 
-			
-			<div class="pointbox">
-			
-				<span> 주문 시 적립 예정 포인트 : </span> <span id="point"> 225 </span>
-			
-			</div>
-
-		
-		</div>
-		
-		<div class="row my-5">
-		
-			<div class="col-sm-3 offset-3">
-			
-				<button class="form-control py-4"> 계속 쇼핑하기 </button>
-			
-			</div>
-			
-			<div class="col-sm-3">
-			
-				<button onclick="payment()" style="background-color: blue; color: white;" class="form-control py-4"> 결제하기 </button>
+				<div class="col-sm-8">
+				
+					<div> <!--  제품 목록  -->
+					
+						<table class="table my-5" id="carttable"></table>
+						
+					</div>
+					
+					<div> <!--  받는 사람 정보 -->
+					
+						<h5> 받는 사람</h5> 
+						
+						<input type="checkbox" id="checkbox"> 회원과 동일 
+						
+						<form>
+							성명 <input id="ordername"> <br>
+							연락처 <input id="orderphone"> <br>
+							주소 <br>
+							
+								<input type="text" id="maddress1" placeholder="우편번호" name="maddress1">
+								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+								<input type="text" id="maddress2" placeholder="도로명주소" name="maddress2">
+								<input type="text" id="maddress3" placeholder="지번주소" name="maddress3">
+								<span id="guide" style="color:#999;display:none"></span>
+								<input type="text" id="maddress4" placeholder="상세주소" name="maddress4">
+								
+							배송 요청사항 <input id="orderrequest"> <br>
+						</form>
+						
+					</div>
+					
+				</div>
+				
+				<div class="col-sm-4">
+				
+					<div class="paybox">
+					
+						<div> 
+							* 5000포인트 이상부터 사용가능합니다.
+							<br>
+							보유 포인트 : <span id="mpoint"></span> <br>
+							포인트 : <input value="0" id="pointinput" style="width: 70px;"> <button onclick="pointbtn()">사용</button>
+						</div>
+						
+						<div> <!-- 결제 정보 -->
+						
+							<div>
+							
+								총 상품금액 : <span id="sumprice"> 29,000원 </span>  <br>
+								배송비 : <span id="deliverypay"> 3,000원 </span>  <br>
+								포인트사용 : <span id="pointbox">  </span> <br>
+								총 결제액 : <span id="totalpay">  </span> <br>
+								
+							</div>
+							
+							<div> 결제 수단 : <span id="paymethod"></span>
+							
+								<button onclick="paymethod('samsung')"> 삼성페이 </button>
+								<button onclick="paymethod('card')"> 카드 </button>
+								<button onclick="paymethod('trans')"> 계좌이체 </button>
+								<button onclick="paymethod('vbank')"> 무통장 </button>
+								<button onclick="paymethod('phone')"> 핸드폰 </button>
+								
+							</div>
+							
+							<div class="row">
+							
+								<div class="col-sm-6">
+								
+									<a href="/jspweb/main.jsp">
+									
+										<button class="form-control  py-4"> 계속 쇼핑하기 </button>
+										
+									</a> 
+									
+								</div>
+								
+								<div class="col-sm-6">
+								
+									<button onclick="payment()" style="background-color: blue; color: white;" class="form-control py-4"> 결제하기 </button>
+									
+								</div>
+								
+							</div>
+							
+						</div>
+						
+					</div>
+					
+				</div>
 				
 			</div>
-		
-		</div>
 		
 	</div>
 	
@@ -70,7 +126,7 @@
 	
 	<!-- iamport.payment.js -->
   	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript" src="/jspweb/js/orderpay.js"></script>
 
 </body>
