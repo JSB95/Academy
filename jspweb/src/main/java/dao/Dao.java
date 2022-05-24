@@ -24,3 +24,5 @@ public class Dao {
 	}
 
 }
+
+// jdbc:mysql://localhost:3306/?user=root

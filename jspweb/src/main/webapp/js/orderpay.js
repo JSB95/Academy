@@ -186,7 +186,11 @@ function saveorder(){
 		url : "saveorder",
 		data : {'orderjson' : JSON.stringify(orderjson)},
 		success : function(re){			
-			alert("DB처리");
+			if(re == "true"){
+				location.href="/jspweb/product/ordersuccess.jsp";
+			} else {
+				alert("오류");
+			}
 		}
 	})
 }

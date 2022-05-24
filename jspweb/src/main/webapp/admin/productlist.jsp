@@ -1,3 +1,5 @@
+<%@page import="java.util.TreeSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="dto.Stock"%>
 <%@page import="dao.CategoryDao"%>
 <%@page import="dao.ProductDao"%>
@@ -60,14 +62,21 @@
 			
 			
 			<th> 
-				<select>
+				<select id="colorbox<%=product.getPno() %>" onchange="getamount(<%=product.getPno()%>)">
 			
 					<% 
 						ArrayList<Stock> stocklist = ProductDao.getProductDao().getStock(product.getPno());
+						Set<String> colors = new TreeSet<String>();
+						Set<String> sizes = new TreeSet<String>();
 						for (Stock stock : stocklist){
+							colors.add(stock.getScolor());
+							sizes.add(stock.getSsize());
+						}
 					%>
 					
-						<option><%=stock.getScolor() %></option>
+					<% for (String s : colors) { %>
+					
+						<option><%=s %></option>
 					<%
 						}
 					%>
@@ -76,13 +85,13 @@
 			</th>
 			
 			<th>
-				<select>
+				<select id="sizebox<%=product.getPno()%>" onchange="getamount(<%=product.getPno()%>)">
 				
 					<% 
-						for (Stock stock : stocklist){
+						for (String s : sizes){
 					%>
 					
-						<option><%=stock.getSsize()%></option>
+						<option><%=s%></option>
 					<%
 						}
 					%>
