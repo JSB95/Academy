@@ -3,6 +3,9 @@ package dao;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import dto.Category;
 import dto.Order;
 import dto.Product;
@@ -253,6 +256,26 @@ public class ProductDao extends Dao {
 		}
 		
 		return false;
+	}
+	
+	public JSONArray getchart() {
+		String sql = "SELECT SUBSTRING_INDEX(orderdate, ' ', 1) AS 날짜, SUM(ordertotalpay) FROM porder GROUP BY 날짜 ORDER BY 날짜 DESC";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			JSONArray ja = new JSONArray();
+			while (rs.next()) {
+				JSONObject jo = new JSONObject();
+				jo.put("date", rs.getString(1));
+				jo.put("value", rs.getString(2));
+				ja.put(jo);
+			}
+			System.out.println(ja);
+			return ja;
+		} catch (Exception e) {
+			System.out.println("getchart error : " + e);
+		}
+		return null;
 	}
 
 }

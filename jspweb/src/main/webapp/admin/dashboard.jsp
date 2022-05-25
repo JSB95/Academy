@@ -31,7 +31,7 @@
 			<li><button onclick="pagechange('productstock')">제품 재고</button></li>
 			<li><button onclick="#">주문 현황</button></li>
 			<li><button onclick="#">주문 배송</button></li>
-			<li><button onclick="#">매출 관리</button></li>
+			<li><button onclick="pagechange('productsales')">매출 관리</button></li>
 			<li> <a href="/jspweb/main.jsp">홈페이지로 이동</a></li>
 			<li> <a href="/jspweb/logout">로그아웃</a></li>
 		</ul>
@@ -49,6 +49,14 @@
 	
 	<!-- jquery 최신 cdn -->
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+	<!-- am chart -->
+	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/locales/de_DE.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/geodata/germanyLow.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
 	
 	<!-- 사용자정의 js -->
 	<script src="/jspweb/js/dashboard.js" type="text/javascript"></script>

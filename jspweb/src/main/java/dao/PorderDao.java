@@ -72,5 +72,17 @@ public class PorderDao extends Dao{
 		
 		return null;
 	}
+	
+	public boolean cancelorder(int orderdetailno, int active) {
+		try {
+			String sql = "UPDATE porderdetail SET orderdetailactive = " + active + " WHERE orderdetailno = " + orderdetailno;
+			ps = con.prepareStatement(sql);
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("cancelorder error : " + e);
+		}
+		return false;
+	}
 
 }
