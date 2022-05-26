@@ -131,7 +131,7 @@
 			%>
 			<tr>
 				<td class="replywriter" width="10%"><%=reply.getMid() %> <br>  </td>
-				<td class="replywriter" width="70%" colspan="2"> <%=reply.getRcontent() %> <button class="btn replybtn" onclick="rereplyview(<%=reply.getRno()%>, <%=reply.getBno()%>, <%=mid %>)">댓글</button></td>
+				<td class="replywriter" width="70%" colspan="2"> <%=reply.getRcontent() %> <button class="btn replybtn" onclick="rereplyview(<%=reply.getRno()%>, <%=reply.getBno()%>, '<%=mid %>')">댓글</button></td>
 				<td class="replywriter"  width="10%"> <%=reply.getRdate() %> 
 				<% if (mid != null && mid.equals(reply.getMid())) { %>
 				

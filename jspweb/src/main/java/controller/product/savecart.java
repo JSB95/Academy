@@ -56,8 +56,8 @@ public class savecart extends HttpServlet {
 				int amount = Integer.parseInt(jsonObject.getString("amount").toString());
 		
 				
-				
-				int totalprice = (int)Math.floor((Double)jsonObject.get("totalprice"));
+				System.out.println(jsonObject.getString("totalprice").toString());
+				int totalprice = Integer.parseInt(jsonObject.getString("totalprice").toString());
 				System.out.println(totalprice);
 				int sno = 0;
 				ArrayList<Stock> list = ProductDao.getProductDao().getStock(pno);

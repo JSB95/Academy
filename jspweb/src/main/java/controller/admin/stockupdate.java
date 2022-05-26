@@ -30,8 +30,10 @@ public class stockupdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int sno = Integer.parseInt( request.getParameter("sno") );
+		System.out.println("[" + sno + "]");
 		int samount = Integer.parseInt( request.getParameter("samount") );
 		ProductDao.getProductDao().stockupdate( sno , samount );
+		response.getWriter().print(true);
 	}
 
 	/**

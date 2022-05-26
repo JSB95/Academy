@@ -31,7 +31,16 @@ public class getchart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		JSONArray jsonArray = ProductDao.getProductDao().getchart();
+		
+		int type = Integer.parseInt(request.getParameter("type"));
+		int value = 0;
+		if (request.getParameter("value") != null) {
+			value = Integer.parseInt(request.getParameter("value"));
+		}
+		System.out.println(value);
+		JSONArray jsonArray = ProductDao.getProductDao().getchart(type, value);
+		
+		
 		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");

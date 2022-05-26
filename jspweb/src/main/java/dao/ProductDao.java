@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.mysql.cj.xdevapi.JsonArray;
+
 import dto.Category;
 import dto.Order;
+import dto.Porderdetail;
 import dto.Product;
 import dto.Stock;
 
@@ -258,22 +261,66 @@ public class ProductDao extends Dao {
 		return false;
 	}
 	
-	public JSONArray getchart() {
-		String sql = "SELECT SUBSTRING_INDEX(orderdate, ' ', 1) AS 날짜, SUM(ordertotalpay) FROM porder GROUP BY 날짜 ORDER BY 날짜 DESC";
+	public JSONArray getchart(int type, int value) {
+		
+		String sql= "";
+		JSONArray ja = new JSONArray();
+		
+		if (type == 1) {
+			sql = "SELECT SUBSTRING_INDEX(orderdate, ' ', 1) AS 날짜, SUM(ordertotalpay) FROM porder GROUP BY 날짜 ORDER BY 날짜 DESC";
+		} else if (type == 2) {
+			sql = "SELECT SUM(A.samount), D.cname FROM porderdetail A, stock B, product C, category D WHERE A.sno = B.sno AND B.pno = C.pno AND C.cno = D.cno GROUP BY D.cname ORDER BY orderdetailno desc";
+		} else if (type == 3) {
+			sql = "SELECT SUBSTRING_INDEX(A.orderdate, ' ', 1) as 날짜, SUM(B.samount) as 총판매수량 FROM porder A, Porderdetail B, stock C WHERE A.orderno = B.orderno AND B.sno = C.sno and C.pno = (SELECT pno FROM stock WHERE sno = " + value + " ) GROUP BY 날짜 ORDER BY 날짜 DESC";
+		}
+		
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			JSONArray ja = new JSONArray();
+			
 			while (rs.next()) {
 				JSONObject jo = new JSONObject();
-				jo.put("date", rs.getString(1));
-				jo.put("value", rs.getString(2));
-				ja.put(jo);
+				
+				if (type == 1 || type == 3) {
+					jo.put("date", rs.getString(1));
+					jo.put("value", rs.getInt(2));
+					ja.put(jo);
+					System.out.println(jo.toString());
+				} else if (type == 2) {
+					jo.put("value", rs.getInt(1));
+					jo.put("category", rs.getString(2));
+					ja.put(jo);
+				}
+				
 			}
-			System.out.println(ja);
+			
 			return ja;
 		} catch (Exception e) {
 			System.out.println("getchart error : " + e);
+		}
+		return null;
+	}
+	
+	public ArrayList<Porderdetail> getorderdetail(){
+		String sql = "SELECT A.* , SUBSTRING_INDEX(B.orderdate, ' ', 1) AS 날짜 FROM porderdetail A, porder B WHERE A.orderno = B.orderno AND SUBSTRING_INDEX(B.orderdate, ' ', 1) = SUBSTRING_INDEX(NOW(), ' ', 1) AND A.orderdetailactive = 3";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ArrayList<Porderdetail> list = new ArrayList<Porderdetail>();
+			while (rs.next()) {
+				Porderdetail orderdetail = new Porderdetail();
+				orderdetail.setOrderdetailno(rs.getInt(1));
+				orderdetail.setOrderdetailactive(rs.getInt(2));
+				orderdetail.setSamout(rs.getInt(3));
+				orderdetail.setTotalprice(rs.getInt(4));
+				orderdetail.setOrderno(rs.getInt(5));
+				orderdetail.setSno(rs.getInt(6));
+				list.add(orderdetail);	
+			}
+			return list;
+		} catch (Exception e) {
+			System.out.println("getorderdetail error : " + e);
 		}
 		return null;
 	}

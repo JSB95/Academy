@@ -3,6 +3,7 @@ package controller.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,6 +65,7 @@ public class getstock extends HttpServlet {
 						"</tr>";
 			}
 			out.print(html);
+			
 		}
 	}
 

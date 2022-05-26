@@ -58,15 +58,22 @@ function showupdate(sno){
 }
 
 function stockupdate(){
-	let sno = $("#sno").val();
-	let samount = $("#samount").val();
 	
+	let sno = $("#sno").text();
+	let samount = $("#samount").val();
+	console.log("stock update sno : " + sno);
+	console.log("stock update samount : " + samount);
 	$.ajax({
 		url : "stockupdate",
 		data : {"sno" : sno, "samount" : samount},
 		success : function(re){
-			$("#modalclosebtn2").click();
-			$("#mainbox").load("productlist.jsp");
+			if (re){
+				$("#modalclosebtn2").click();
+				$("#mainbox").load("productlist.jsp");
+			} else {
+				alert("오류");
+			}
+			
 		}
 	});
 }

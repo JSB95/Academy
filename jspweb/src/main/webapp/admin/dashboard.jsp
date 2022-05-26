@@ -57,6 +57,7 @@
 	<script src="https://cdn.amcharts.com/lib/5/locales/de_DE.js"></script>
 	<script src="https://cdn.amcharts.com/lib/5/geodata/germanyLow.js"></script>
 	<script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
 	
 	<!-- 사용자정의 js -->
 	<script src="/jspweb/js/dashboard.js" type="text/javascript"></script>
