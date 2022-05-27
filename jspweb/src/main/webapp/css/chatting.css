@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+.chattingbox{
+	border: 3px solid #f9f9f9;
+}
+
+.enter_title{
+	border-bottom: 3px solid #f9f9f9;
+	text-align: center;
+	padding: 10%;
+}
+
+.img{
+	margin-left: 5%;
+}
+
+.btnbox span{
+	font-size: 3px;
+}
+
+.contentbox{
+	height: 700px;
+	border: 1px solid black;
+	background-color: #b2c7d9;
+	overflow-y:scroll; 
+}
+
+.sendcontent{
+	text-align: right;
+}
+
+.sendcontent .content{
+	background-color: #ffeb33;
+}
+
+.receievecontent{
+	text-align: left;
+}
+
+.content{
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding: 10px;
+	display: inline-block;
+	font-size: 12px;
+}
+
+.date{
+	font-size: 3px;
+	margin: 5px 2px;
+}
+
+.alarm{
+	background-color: #a9bdce;
+	text-align: center;
+	font-size: 8px;
+	padding: 2%;
+	margin: 0 auto;
+	width: 70%;
+}
+
+.sendbtn{
+	background-color: #ffeb33 !important;
+}
