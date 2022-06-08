@@ -1,3 +1,5 @@
+<%@page import="dao.BoardDao"%>
+<%@page import="dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,27 +10,34 @@
 </head>
 <body>
 
+	<%
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		BoardDto boardDto = BoardDao.getBoardDao().getboard(bno);
+	%>
+	
+	<input type="text" id="bno" value="<%out.print(bno);%>">
+
 	<%@include file="header.jsp" %>
 	
 	<br><br><br><br>
 	
 	<div class="container">
 	
-		<h3>게시글 등록</h3>
+		<h3>게시글 수정</h3>
 		
 			<div class="row">
 			
 				<div class="col-md-4">
 				
-					<input class="form-control" type="text" placeholder="제목입력" id="board_title" name="board_title"> <br>
-					<textarea class="form-control" placeholder="내용을 입력해주세요." rows="20" cols="10" style="resize: none;" id="board_content"></textarea>
+					<input class="form-control" type="text" placeholder="제목입력" id="board_title" name="board_title" value=" <%=boardDto.getBtitle() %> "><br>
+					<textarea class="form-control" placeholder="내용을 입력해주세요." rows="20" cols="10" style="resize: none;" id="board_content"> <%=boardDto.getBcontent() %></textarea>
 				</div>
 				
 			
 			
 				<div class="col-md-3 offset-1">
 				
-					<input class="form-control" id="board_write" type="text" placeholder="작성자">
+					<input class="form-control" id="board_write" type="text" placeholder="작성자" value="<%=boardDto.getBwrite()%>">
 				
 					<br><br><br>
 				
@@ -58,7 +67,7 @@
 					
 					<br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br><br> <br> <br>
 					
-					<button type="button" class="btn btn-primary" id="write">등록</button>
+					<button type="button" class="btn btn-primary" id="update">수정</button>
 					
 					<a href="boardlist.jsp"><button type="button" class="btn btn-secondary">취소</button></a>
 				</div>
@@ -79,7 +88,7 @@
 	
 	<%@include file="footer.jsp" %>
 	
-	<script src="js/boardwrite.js" type="text/javascript"></script>
+	<script src="js/boardupdate.js" type="text/javascript"></script>
 	
 
 </body>

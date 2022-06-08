@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$("#secret").change(function(){
 		if($("#secret").is(":checked")){
 			$("#secret_pw").html(
-			'<input type="password" class="form-control" placeholder="비밀번호 입력">'
+			'<input type="password" class="form-control" placeholder="비밀번호 입력" id="board_password">'
 			)
 		} else {
 			$("#secret_pw").html(

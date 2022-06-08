@@ -48,6 +48,21 @@ function login() {
         console.log('complete. form.submit();');
         //form.submit();
     }
+    
+    let name = $("#name").val();
+    
+    let password = $("#password").val();
+    console.log(name + " + " + password);
+    
+    $.ajax({
+		url : "signup",
+		data : {"name" : name, "password" : password},
+		success : function(re){
+			console.log(re);
+			location.href='login.jsp';
+		}	
+	
+	})
 }
 
 function checkValidUsername(form) {
@@ -129,3 +144,4 @@ function checkValidPassword2(form) {
 
     return true;
 }
+

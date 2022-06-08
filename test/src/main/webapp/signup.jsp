@@ -27,7 +27,7 @@
                             <a class="form_item_name">username</a>
                         </div>
                         <div>
-                            <input type="text" name="username" placeholder="name" class="form_input"/>
+                            <input type="text" name="username" placeholder="name" class="form_input" id="name"/>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_username" class="form_text_alert"></div>
@@ -49,7 +49,7 @@
                             <a class="form_item_name">Password</a>
                         </div>
                         <div>
-                            <input type="password" name="password" placeholder="Enter password" class="form_input" />
+                            <input type="password" name="password" placeholder="Enter password" class="form_input" id="password"/>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_password" class="form_text_alert"></div>
@@ -60,7 +60,7 @@
                             <a class="form_item_name">Confirm Password</a>
                         </div>
                         <div>
-                            <input type="password" name="password2" onfocus="" placeholder="Enter password again" class="form_input" />
+                            <input type="password" name="password2" onfocus="" placeholder="Enter password again" class="form_input"/>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_password2" class="form_text_alert"></div>

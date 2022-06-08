@@ -1,4 +1,4 @@
-$('#write').on('click',function(){
+$('#update').on('click',function(){
 	let btitle = $(this).parent().parent().find('#board_title').val();
 	let bcontent = $(this).parent().parent().find('#board_content').val();
 	let bpassword = $(this).parent().parent().find('#board_password').val();
@@ -8,12 +8,13 @@ $('#write').on('click',function(){
 		alert("비어있는 항목 존재");
 		return;
 	}
-	
+	let bno = $('#bno').val()
 	$.ajax({
-		url : "boardwrite",
-		data : {"btitle" : btitle, "bcontent" : bcontent, "bpassword" : bpassword, "bwrite" : bwrite},
+		url : "update",
+		data : {"btitle" : btitle, "bcontent" : bcontent, "bpassword" : bpassword, "bwrite" : bwrite, "bno" : bno},
 		success : function(re){
 			location.href="boardlist.jsp";
+			alert(re);
 		}
 		
 		

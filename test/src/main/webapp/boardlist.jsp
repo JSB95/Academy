@@ -1,3 +1,8 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="dao.BoardDao"%>
+<%@page import="dto.BoardDto"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,6 +14,8 @@
 <body>
 
 	<%@include file="header.jsp" %>
+	
+	<% ArrayList<BoardDto> boardlist = BoardDao.getBoardDao().getboardlist(); %>
 	
 	<br><br><br><br>
 	
@@ -29,13 +36,35 @@
 				    </tr>
 				</thead>
 				
+				<% 
+					Date date = new Date();
+				
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					
+					String date1 = dateFormat.format(date);
+					
+					for (BoardDto boardDto : boardlist){
+						String date2 = dateFormat.format(dateFormat.parse(boardDto.getBdate()));
+						String date3 = "";
+						if (date1.equals(date2)){
+							date3 = boardDto.getBdate().split(" ")[1];
+						} else {
+							date3 = boardDto.getBdate().split(" ")[0];
+						}
+					
+				
+				
+				%>
+				
 				<tr>
-					<th scope="col">장승빈</th>
-				    <th scope="col"> <a href="boardview.jsp">테스트</a></th>
-					<th scope="col">테스트</th>
-				    <th scope="col">2022-05-18</th>
+					<th scope="col"><%=boardDto.getBwrite() %></th>
+				    <th scope="col"> <a href="boardview.jsp?bno=<%=boardDto.getBno()%>"><%=boardDto.getBtitle()%></a></th>
+					<th scope="col"><%=boardDto.getBcontent() %></th>
+				    <th scope="col"><% out.print(date3); %></th>
 				
 				</tr>
+				
+				<% } %>
 			
 			</table>
 			
